@@ -19,12 +19,13 @@ services:
       - ./snort/snort.conf:/etc/snort/snort.conf
       - ./snort/local.rules:/etc/snort/rules/local.rules
       - ./snort/barnyard2.conf:/etc/snort/barnyard2.conf   
-      - /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
+      - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
     # links: 
     #   - database
 
   client: 
-    image: hypriot/rpi-node
+    build: ./client
+    image: etherfuse/client:0.0
   
 volumes:
   data:
