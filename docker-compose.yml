@@ -29,6 +29,7 @@ services:
     image: etherfuse/client:0.0
     volumes: 
       - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      - ./client/app:/usr/src/app
   
 volumes:
   data:
