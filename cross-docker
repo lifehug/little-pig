@@ -1,0 +1,29 @@
+#!/bin/sh
+
+if [ "$#" -lt 2 ]
+then
+	printf "usage: $0 run [docker args]\n"
+	exit 1
+fi
+
+if [ $1 != "run" ]
+then
+	printf "first argument must be run\n"
+	exit 1
+fi
+
+shift
+
+if [ ! -f /tmp/qemu-static ]
+then
+	mkdir -p /tmp/qemu-static
+	(cd /tmp/qemu-static && docker run justincormack/debian-qemu-user tarup.sh | tar xf -)
+fi
+
+for f in /tmp/qemu-static/qemu-*-static
+do
+	ARCH="$(basename $f | sed 's/^qemu-//' | sed 's/-static$//')"
+	VOLUMES="${VOLUMES} -v $f:/usr/bin/qemu-$ARCH-static"
+done
+
+exec docker run ${VOLUMES} $*

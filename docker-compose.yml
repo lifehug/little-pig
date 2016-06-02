@@ -1,0 +1,35 @@
+version: '2'
+
+services: 
+
+  database:  
+    image: hypriot/rpi-mysql:5.5
+    environment:
+      MYSQL_ROOT_PASSWORD: "${ETHERFUSE_ROOT_DB}"
+      MYSQL_DATABASE: snort
+      MYSQL_USER: snort
+      MYSQL_PASSWORD: "${ETHERFUSE_SNORT_DB}"
+    volumes:
+      - data:/var/lib/mysql
+      - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+  
+  snort: 
+    image: etherfuse/network-visibility 
+    volumes:
+      - ./snort/snort.conf:/etc/snort/snort.conf
+      - ./snort/local.rules:/etc/snort/rules/local.rules
+      - ./snort/barnyard2.conf:/etc/snort/barnyard2.conf   
+      - /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
+    # links: 
+    #   - database
+
+  client: 
+    image: hypriot/rpi-node
+  
+volumes:
+  data:
+
+
+    # expose:
+    #   - "3306"
+

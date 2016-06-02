@@ -1,0 +1,52 @@
+{
+"traffic" : [
+		{
+			"source" : "In",
+			"name" : "Dave" ,
+			"device" : "iPhone",
+			"site" : "Facebook",
+			"time" : "1/12/2016 9:45"
+			
+		},
+		{
+			"source" : "Out",
+			"name" : "Katie" ,
+			"device" : "Android",
+			"site" : "Instagram",
+			"time" : "1/12/2016 9:30"
+			
+		},
+		{
+			"source" : "In",
+			"name" : "Dave" ,
+			"device" : "Tablet",
+			"site" : "AirBnb",
+			"time" : "1/12/2016 9:00"
+			
+		},
+		{
+			"source" : "In",
+			"name" : "Steven" ,
+			"device" : "Desktop",
+			"site" : "Apple",
+			"time" : "1/12/2016 8:30"
+			
+		},
+		{
+			"source" : "Out",
+			"name" : "James" ,
+			"device" : "Tablet",
+			"site" : "PBS Kids",
+			"time" : "1/12/2016 8:15"
+			
+		},
+		{
+			"source" : "Out",
+			"name" : "Charlee" ,
+			"device" : "Watch",
+			"site" : "Facebook",
+			"time" : "1/12/2016 8:00"
+			
+		}
+	]
+}

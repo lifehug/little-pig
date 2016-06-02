@@ -1,0 +1,40 @@
+{
+	"activity" :[
+		{
+		"device" : "Android", 
+		"profile" : "Dave", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "12/10/2016"
+		},
+		{
+		"device" : "Desktop", 
+		"profile" : "Charlee", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "5/10/2016"
+		},
+		{
+		"device" : "Router", 
+		"profile" : "Dave", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "10/14/2016"
+		},
+		{
+		"device" : "Laptop", 
+		"profile" : "Unknown", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "11/10/2016"
+		},
+		{
+		"device" : "iPhone", 
+		"profile" : "Katie", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "12/12/2016"
+		},
+		{
+		"device" : "Tablet", 
+		"profile" : "James", 
+		"discovered" : "10/10/2015", 
+		"last-seen" : "12/17/2016"
+		}
+	]
+}

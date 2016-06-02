@@ -1,0 +1,23 @@
+{
+    "account" : [
+		{
+			"name" : "David James Taylor",
+			"dob" : "7-11-81",
+			"age" : "34",
+			"time-zone" : "PST",
+			"picture" : "/davidimg.jpeg",
+			"devices" : [
+				{"device" : "iPhone"},
+				{"device" : "desktop"},
+				{"device" : "tablet"},
+				{"device" : "fitbit"}
+			],
+			"last-seen" : [
+				{"time" : "1/12/2016 9:30"},
+				{"time" : "1/9/2016 5:30"},
+				{"time" : "12/18/2016 5:30"},
+				{"time" : "1/12/2016 10:30"}
+			]
+		}
+	]
+}
