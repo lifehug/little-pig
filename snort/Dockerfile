@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir ~/snort_src
 WORKDIR ~/snort_src
 RUN wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz -P ~/snort_src
-RUN tar -xvzf daq-2.0.6.tar.gz -C ~/snort_src
+RUN tar -xvzf ~/snort_src/daq-2.0.6.tar.gz -C ~/snort_src
 RUN cd ~/snort_src/daq-2.0.6 && ./configure && make && make install
 
 # ==== install Snort ==== 
