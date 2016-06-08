@@ -17,15 +17,12 @@ RUN apt-get update && apt-get install -y \
   libmysqlclient-dev \
   mysql-client \
   autoconf \
-  libtool \
-  wget
+  libtool
 
 # ================================= install DAQ ================================= 
 RUN mkdir ~/snort_src
 WORKDIR ~/snort_src
-#RUN https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz -P ~/snort_src
 ADD https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz daq-2.0.6.tar.gz
-#RUN tar -xvzf ~/snort_src/daq-2.0.6.tar.gz -C ~/snort_src
 RUN tar -xvzf daq-2.0.6.tar.gz 
 RUN cd daq-2.0.6 && ./configure && make && make install
 
