@@ -47,8 +47,8 @@ RUN mkdir /etc/snort/so_rules
 # Create some files that stores rules and ip lists
 RUN touch /etc/snort/rules/iplists/black_list.rules
 RUN touch /etc/snort/rules/iplists/white_list.rules
-RUN touch /etc/snort/rules/local.rules
-RUN touch /etc/snort/sid-msg.map
+COPY local.rules /etc/snort/rules/
+COPY sid-msg.map /etc/snort/
 # Create our logging directories:
 RUN mkdir /var/log/snort
 RUN mkdir /var/log/snort/archived_logs
@@ -65,15 +65,13 @@ RUN chown -R snort:snort /var/log/snort
 RUN chown -R snort:snort /usr/local/lib/snort_dynamicrules
 
 WORKDIR ~/snort_src/snort-2.9.8.2/etc/
-RUN cp *.conf* /etc/snort
-RUN cp *.map /etc/snort
-RUN cp *.dtd /etc/snort
+RUN cp ~/snort_src/snort-2.9.8.2/etc/*.conf* /etc/snort
+RUN cp ~/snort_src/snort-2.9.8.2/etc/*.map /etc/snort
+RUN cp ~/snort_src/snort-2.9.8.2/etc/*.dtd /etc/snort
 WORKDIR ~/snort_src/snort-2.9.8.2/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
 RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
-
-COPY local.rules /etc/snort/rules/
 COPY snort.conf /etc/snort/
-COPY sid-msg.map /etc/snort/
+
 RUN snort -T -c /etc/snort/snort.conf -i eth0
 
 # =================================  Install Barnyard ================================= 
