@@ -77,14 +77,14 @@ WORKDIR ${home}/${snort}/src/dynamic-preprocessors/build/usr/local/lib/snort_dyn
 RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
 COPY snort.conf /etc/snort/
 
-RUN snort -T -c /etc/snort/snort.conf -i eth0
-
 # =================================  Install Barnyard ================================= 
 WORKDIR ${home}
 ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz ${barnyard}.tar.gz
 RUN tar zxvf ${barnyard}.tar.gz
 RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 ${barnyard}
-RUN cd ${home}/${barnyard} && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
+RUN autoreconf -fvi -I ./m4
+RUN ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
+
 WORKDIR ${home}/${barnyard}
 COPY barnyard2.conf /etc/snort/
 # the /var/log/barnyard2 folder is never used or referenced
