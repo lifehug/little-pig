@@ -65,7 +65,7 @@ RUN chown -R snort:snort /var/log/snort
 RUN chown -R snort:snort /usr/local/lib/snort_dynamicrules
 
 WORKDIR ~/snort_src/snort-2.9.8.2/etc/
-RUN cp ~/snort_src/snort-2.9.8.2/etc/*.conf* /etc/snort
+RUN cd ~/snort_src/snort-2.9.8.2/etc/ && cp *.conf* /etc/snort
 RUN cp ~/snort_src/snort-2.9.8.2/etc/*.map /etc/snort
 RUN cp ~/snort_src/snort-2.9.8.2/etc/*.dtd /etc/snort
 WORKDIR ~/snort_src/snort-2.9.8.2/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
