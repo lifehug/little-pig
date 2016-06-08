@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
   libtool \
   wget
 
-# ==== install DAQ =====
+# ================================= install DAQ ================================= 
 RUN mkdir ~/snort_src
 WORKDIR ~/snort_src
 #RUN https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz -P ~/snort_src
@@ -29,8 +29,7 @@ ADD https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz daq-2.0.6.tar.gz
 RUN tar -xvzf daq-2.0.6.tar.gz 
 RUN cd daq-2.0.6 && ./configure && make && make install
 
-RUN cd fail
-# ==== install Snort ==== 
+# ================================= install Snort =================================  
 WORKDIR ~/snort_src
 ADD https://snort.org/downloads/snort/snort-2.9.8.2.tar.gz snort-2.9.8.2.tar.gz
 RUN tar -xvzf snort-2.9.8.2.tar.gz
@@ -80,7 +79,7 @@ COPY snort.conf /etc/snort/
 COPY sid-msg.map /etc/snort/
 RUN snort -T -c /etc/snort/snort.conf -i eth0
 
-# ==== Install Barnyard ====
+# =================================  Install Barnyard ================================= 
 WORKDIR ~/snort_src
 ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz barnyard2-2-1.14-336.tar.gz
 RUN tar zxvf barnyard2-2-1.14-336.tar.gz
