@@ -64,30 +64,30 @@ RUN chown -R snort:snort /etc/snort
 RUN chown -R snort:snort /var/log/snort
 RUN chown -R snort:snort /usr/local/lib/snort_dynamicrules
 
-WORKDIR ~/snort_src/snort-2.9.8.2/etc/
-RUN cd ~/snort_src/snort-2.9.8.2/etc/ && cp *.conf* /etc/snort
-RUN cp ~/snort_src/snort-2.9.8.2/etc/*.map /etc/snort
-RUN cp ~/snort_src/snort-2.9.8.2/etc/*.dtd /etc/snort
-WORKDIR ~/snort_src/snort-2.9.8.2/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
-RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
-COPY snort.conf /etc/snort/
+# WORKDIR ~/snort_src/snort-2.9.8.2/etc/
+# RUN cp *.conf* /etc/snort
+# RUN cp *.map /etc/snort
+# RUN cp *.dtd /etc/snort
+# WORKDIR ~/snort_src/snort-2.9.8.2/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
+# RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
+# COPY snort.conf /etc/snort/
 
-RUN snort -T -c /etc/snort/snort.conf -i eth0
+# RUN snort -T -c /etc/snort/snort.conf -i eth0
 
-# =================================  Install Barnyard ================================= 
-WORKDIR ~/snort_src
-ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz barnyard2-2-1.14-336.tar.gz
-RUN tar zxvf barnyard2-2-1.14-336.tar.gz
-RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 barnyard2-2-1.14-336
-RUN cd ~/snort_src/barnyard2-2-1.14-336 && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
-WORKDIR ~/snort_src/barnyard2-2-1.14-336
-COPY barnyard2.conf /etc/snort/
-# the /var/log/barnyard2 folder is never used or referenced
-# but barnyard2 will error without it existing
-RUN mkdir /var/log/barnyard2
-RUN chown snort.snort /var/log/barnyard2
-RUN touch /var/log/snort/barnyard2.waldo
-RUN chown snort.snort /var/log/snort/barnyard2.waldo
+# # =================================  Install Barnyard ================================= 
+# WORKDIR ~/snort_src
+# ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz barnyard2-2-1.14-336.tar.gz
+# RUN tar zxvf barnyard2-2-1.14-336.tar.gz
+# RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 barnyard2-2-1.14-336
+# RUN cd ~/snort_src/barnyard2-2-1.14-336 && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
+# WORKDIR ~/snort_src/barnyard2-2-1.14-336
+# COPY barnyard2.conf /etc/snort/
+# # the /var/log/barnyard2 folder is never used or referenced
+# # but barnyard2 will error without it existing
+# RUN mkdir /var/log/barnyard2
+# RUN chown snort.snort /var/log/barnyard2
+# RUN touch /var/log/snort/barnyard2.waldo
+# RUN chown snort.snort /var/log/snort/barnyard2.waldo
 
 
 
