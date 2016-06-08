@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: "${ETHERFUSE_SNORT_DB}"
     volumes:
       - data:/var/lib/mysql
-      - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      - /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
   
   snort: 
     image: etherfuse/network-visibility 
@@ -34,7 +34,4 @@ services:
 volumes:
   data:
 
-
-    # expose:
-    #   - "3306"
 

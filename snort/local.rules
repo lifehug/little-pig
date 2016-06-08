@@ -1,1 +1,4 @@
 alert icmp any any -> $HOME_NET any (msg:"ICMP test detected"; GID:1; sid:10000001; rev:001; classtype:icmp-event;)
+alert udp any any -> $HOME_NET any (msg:"UDP Traffic"; GID:1; sid:10000002; rev:001; classtype:web-application-activity;)
+alert tcp any any -> $HOME_NET any (msg:"TCP Traffic"; GID:1; sid:10000003; rev:001; classtype:web-application-activity;)
+alert ip any any -> $HOME_NET any (msg:"IP Traffic"; GID:1; sid:10000004; rev:001; classtype:web-application-activity;)

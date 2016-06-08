@@ -1,0 +1,4 @@
+1 || 10000001 || 001 || icmp-event || 0 || ICMP Test detected || url,tools.ietf.org/html/rfc792
+1 || 10000002 || 001 || web-application-activity || 0 || UDP Traffic || url,/tools.ietf.org/html/rfc768
+1 || 10000003 || 001 || web-application-activity || 0 || TCP Traffic || url,tools.ietf.org/html/rfc793
+1 || 10000004 || 001 || web-application-activity || 0 || IP Traffic || url,tools.ietf.org/html/rfc791
