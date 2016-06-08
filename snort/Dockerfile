@@ -32,9 +32,9 @@ RUN cd daq-2.0.6 && ./configure && make && make install
 RUN cd fail
 # ==== install Snort ==== 
 WORKDIR ~/snort_src
-RUN wget https://snort.org/downloads/snort/snort-2.9.8.2.tar.gz
+ADD https://snort.org/downloads/snort/snort-2.9.8.2.tar.gz snort-2.9.8.2.tar.gz
 RUN tar -xvzf snort-2.9.8.2.tar.gz
-RUN cd ~/snort_src/snort-2.9.8.2 && ./configure --enable-sourcefire && make && make install
+RUN cd snort-2.9.8.2 && ./configure --enable-sourcefire && make && make install
 RUN ldconfig
 RUN ln -s /usr/local/bin/snort /usr/sbin/snort
 
@@ -82,7 +82,7 @@ RUN snort -T -c /etc/snort/snort.conf -i eth0
 
 # ==== Install Barnyard ====
 WORKDIR ~/snort_src
-RUN wget https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz -O barnyard2-2-1.14-336.tar.gz
+ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz barnyard2-2-1.14-336.tar.gz
 RUN tar zxvf barnyard2-2-1.14-336.tar.gz
 RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 barnyard2-2-1.14-336
 RUN cd ~/snort_src/barnyard2-2-1.14-336 && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
