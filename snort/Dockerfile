@@ -82,10 +82,11 @@ WORKDIR ${home}
 ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz ${barnyard}.tar.gz
 RUN tar zxvf ${barnyard}.tar.gz
 RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 ${barnyard}
+WORKDIR ${barnyard}
 RUN autoreconf -fvi -I ./m4
+RUN ln -s /usr/include/dumbnet.h /usr/include/dnet.h
+RUN ldconfig
 RUN ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
-
-WORKDIR ${home}/${barnyard}
 COPY barnyard2.conf /etc/snort/
 # the /var/log/barnyard2 folder is never used or referenced
 # but barnyard2 will error without it existing
