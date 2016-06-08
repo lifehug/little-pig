@@ -2,6 +2,11 @@ FROM armv7/armhf-ubuntu
 MAINTAINER etherfuse
 COPY interfaces /etc/network/interfaces
 
+ENV home /root/snort_src
+ENV snort snort-2.9.8.2
+ENV daq daq-2.0.6
+ENV barnyard barnyard2-2-1.14-336
+
 # ===== install all dependencies =====
 RUN apt-get update && apt-get install -y \ 
   build-essential \ 
@@ -20,17 +25,17 @@ RUN apt-get update && apt-get install -y \
   libtool
 
 # ================================= install DAQ ================================= 
-RUN mkdir ~/snort_src
-WORKDIR ~/snort_src
-ADD https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz daq-2.0.6.tar.gz
-RUN tar -xvzf daq-2.0.6.tar.gz 
-RUN cd daq-2.0.6 && ./configure && make && make install
+RUN mkdir ${home}
+WORKDIR ${home}
+ADD https://www.snort.org/downloads/snort/${daq}.tar.gz ${daq}.tar.gz
+RUN tar -xvzf ${daq}.tar.gz 
+RUN cd ${daq} && ./configure && make && make install
 
 # ================================= install Snort =================================  
-WORKDIR ~/snort_src
-ADD https://snort.org/downloads/snort/snort-2.9.8.2.tar.gz snort-2.9.8.2.tar.gz
-RUN tar -xvzf snort-2.9.8.2.tar.gz
-RUN cd snort-2.9.8.2 && ./configure --enable-sourcefire && make && make install
+WORKDIR ${home}
+ADD https://snort.org/downloads/snort/${snort}.tar.gz ${snort}.tar.gz
+RUN tar -xvzf ${snort}.tar.gz
+RUN cd ${snort} && ./configure --enable-sourcefire && make && make install
 RUN ldconfig
 RUN ln -s /usr/local/bin/snort /usr/sbin/snort
 
@@ -64,23 +69,23 @@ RUN chown -R snort:snort /etc/snort
 RUN chown -R snort:snort /var/log/snort
 RUN chown -R snort:snort /usr/local/lib/snort_dynamicrules
 
-# WORKDIR ~/snort_src/snort-2.9.8.2/etc/
+# WORKDIR ${home}/${snort}/etc/
 # RUN cp *.conf* /etc/snort
 # RUN cp *.map /etc/snort
 # RUN cp *.dtd /etc/snort
-# WORKDIR ~/snort_src/snort-2.9.8.2/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
+# WORKDIR ${home}/${snort}/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
 # RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
 # COPY snort.conf /etc/snort/
 
 # RUN snort -T -c /etc/snort/snort.conf -i eth0
 
 # # =================================  Install Barnyard ================================= 
-# WORKDIR ~/snort_src
-# ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz barnyard2-2-1.14-336.tar.gz
-# RUN tar zxvf barnyard2-2-1.14-336.tar.gz
-# RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 barnyard2-2-1.14-336
-# RUN cd ~/snort_src/barnyard2-2-1.14-336 && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
-# WORKDIR ~/snort_src/barnyard2-2-1.14-336
+# WORKDIR ${home}
+# ADD https://github.com/firnsy/barnyard2/archive/7254c24702392288fe6be948f88afb74040f6dc9.tar.gz ${barnyard}.tar.gz
+# RUN tar zxvf ${barnyard}.tar.gz
+# RUN mv barnyard2-7254c24702392288fe6be948f88afb74040f6dc9 ${barnyard}
+# RUN cd ${home}/${barnyard} && autoreconf -fvi -I ./m4 && ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
+# WORKDIR ${home}/${barnyard}
 # COPY barnyard2.conf /etc/snort/
 # # the /var/log/barnyard2 folder is never used or referenced
 # # but barnyard2 will error without it existing
