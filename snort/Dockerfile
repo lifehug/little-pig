@@ -95,7 +95,7 @@ RUN touch /var/log/snort/barnyard2.waldo
 RUN chown snort.snort /var/log/snort/barnyard2.waldo
 
 WORKDIR ${home}
-RUN /usr/local/bin/snort -d -q -u snort -g snort -c /etc/snort/snort.conf -i eth0
+RUN /usr/local/bin/snort -q -u snort -g snort -c /etc/snort/snort.conf -i eth0
 #CMD ["/bin/bash", "/usr/local/bin/barnyard2 -c /etc/snort/barnyard2.conf -d /var/log/snort -f snort.u2 -q -w /var/log/snort/barnyard2.waldo -g snort -u snort -D -a /var/log/snort/archived_logs"]
 
 
