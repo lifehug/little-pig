@@ -24,9 +24,7 @@ services:
       - test
 
   test: 
-    image: hypriot/rpi-mysql:5.5
-    environment: 
-       MYSQL_ALLOW_EMPTY_PASSWORD: yes 
+    image: ioft/armhf-debian
 
   client: 
     build: ./client
