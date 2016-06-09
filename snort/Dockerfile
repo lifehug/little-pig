@@ -104,7 +104,7 @@ RUN systemctl enable barnyard2
 #RUN systemctl start barnyard2
 #RUN systemctl status barnyard2
 
-CMD["/bin/bash", "systemctl status snort && systemctl status barnyard2"]
+#CMD["/bin/bash", "systemctl status snort && systemctl status barnyard2"]
 
 
 
