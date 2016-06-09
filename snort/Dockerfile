@@ -9,20 +9,23 @@ ENV barnyard barnyard2-2-1.14-336
 
 # ===== install all dependencies =====
 RUN apt-get update && apt-get install -y \ 
+  autoconf \
+  bison \ 
   build-essential \ 
+  flex \
+  libdumbnet-dev \
+  liblzma-dev \ 
+  libmysqlclient-dev \
   libpcap-dev \
   libpcre3-dev \
-  libdumbnet-dev \
-  bison \ 
-  flex \
-  zlib1g-dev \
-  liblzma-dev \ 
-  openssl \
   libssl-dev \
-  libmysqlclient-dev \
+  libtool \
   mysql-client \
-  autoconf \
-  libtool
+  openssl \
+  supervisor \
+  zlib1g-dev \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # ================================= install DAQ ================================= 
 WORKDIR ${home}
@@ -39,39 +42,28 @@ RUN ldconfig
 RUN ln -s /usr/local/bin/snort /usr/sbin/snort
 
 # Create the snort user and group:
-RUN groupadd snort
-RUN useradd snort -r -s /sbin/nologin -c SNORT_IDS -g snort
+RUN groupadd snort && useradd snort -r -s /sbin/nologin -c SNORT_IDS -g snort
+
 # Create the Snort directories:
-RUN mkdir /etc/snort
-RUN mkdir /etc/snort/rules
-RUN mkdir /etc/snort/rules/iplists
-RUN mkdir /etc/snort/preproc_rules
-RUN mkdir /usr/local/lib/snort_dynamicrules
-RUN mkdir /etc/snort/so_rules
+RUN mkdir /etc/snort && mkdir /etc/snort/rules && mkdir /etc/snort/rules/iplists && mkdir /etc/snort/preproc_rules && mkdir /usr/local/lib/snort_dynamicrules && mkdir /etc/snort/so_rules
+
 # Create some files that stores rules and ip lists
-RUN touch /etc/snort/rules/iplists/black_list.rules
-RUN touch /etc/snort/rules/iplists/white_list.rules
+RUN touch /etc/snort/rules/iplists/black_list.rules && touch /etc/snort/rules/iplists/white_list.rules
+
 COPY local.rules /etc/snort/rules/
 COPY sid-msg.map /etc/snort/
 # Create our logging directories:
-RUN mkdir /var/log/snort
-RUN mkdir /var/log/snort/archived_logs
+RUN mkdir /var/log/snort && mkdir /var/log/snort/archived_logs
+
 # Adjust permissions:
-RUN chmod -R 5775 /etc/snort
-RUN chmod -R 5775 /var/log/snort
-RUN chmod -R 5775 /var/log/snort/archived_logs
-RUN chmod -R 5775 /etc/snort/so_rules
-RUN chmod -R 5775 /usr/local/lib/snort_dynamicrules
+RUN chmod -R 5775 /etc/snort && chmod -R 5775 /var/log/snort && chmod -R 5775 /var/log/snort/archived_logs && chmod -R 5775 /etc/snort/so_rules && chmod -R 5775 /usr/local/lib/snort_dynamicrules
 
 # Change Ownership on folders:
-RUN chown -R snort:snort /etc/snort
-RUN chown -R snort:snort /var/log/snort
-RUN chown -R snort:snort /usr/local/lib/snort_dynamicrules
+RUN chown -R snort:snort /etc/snort && chown -R snort:snort /var/log/snort && chown -R snort:snort /usr/local/lib/snort_dynamicrules
 
 WORKDIR ${home}/${snort}/etc/
-RUN cp *.conf* /etc/snort
-RUN cp *.map /etc/snort
-RUN cp *.dtd /etc/snort
+RUN cp *.conf* /etc/snort && cp *.map /etc/snort && cp *.dtd /etc/snort
+
 WORKDIR ${home}/${snort}/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/
 RUN cp * /usr/local/lib/snort_dynamicpreprocessor/
 COPY snort.conf /etc/snort/
@@ -87,16 +79,12 @@ RUN ln -s /usr/include/dumbnet.h /usr/include/dnet.h
 RUN ldconfig
 RUN ./configure --with-mysql --with-mysql-libraries=/usr/lib/arm-linux-gnueabihf && make && make install
 COPY barnyard2.conf /etc/snort/
+
 # the /var/log/barnyard2 folder is never used or referenced
 # but barnyard2 will error without it existing
-RUN mkdir /var/log/barnyard2
-RUN chown snort.snort /var/log/barnyard2
-RUN touch /var/log/snort/barnyard2.waldo
-RUN chown snort.snort /var/log/snort/barnyard2.waldo
+RUN mkdir /var/log/barnyard2 && chown snort.snort /var/log/barnyard2 && touch /var/log/snort/barnyard2.waldo && chown snort.snort /var/log/snort/barnyard2.waldo
 
 WORKDIR ${home}
-
-RUN apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
