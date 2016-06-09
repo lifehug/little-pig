@@ -96,13 +96,13 @@ RUN chown snort.snort /var/log/snort/barnyard2.waldo
 
 COPY snort.service /lib/systemd/system/snort.service
 RUN systemctl enable snort
-RUN systemctl start snort
-RUN systemctl status snort
+#RUN systemctl start snort
+#RUN systemctl status snort
 
 COPY barnyard2.service /lib/systemd/system/barnyard2.service
 RUN systemctl enable barnyard2
-RUN systemctl start barnyard2
-RUN systemctl status barnyard2
+#RUN systemctl start barnyard2
+#RUN systemctl status barnyard2
 
 CMD["/bin/bash", "systemctl status snort && systemctl status barnyard2"]
 
