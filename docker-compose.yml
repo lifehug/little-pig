@@ -11,24 +11,22 @@ services:
       MYSQL_PASSWORD: "${ETHERFUSE_SNORT_DB}"
     volumes:
       - data:/var/lib/mysql
-      - /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
+     #- /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
   
   snort: 
-    image: etherfuse/network-visibility 
+    build: ./snort
+    image: etherfuse/snort:0.1
     volumes:
-      - ./snort/snort.conf:/etc/snort/snort.conf
-      - ./snort/local.rules:/etc/snort/rules/local.rules
-      - ./snort/barnyard2.conf:/etc/snort/barnyard2.conf   
-      - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      #- "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./database/create_mysql:/root/create_mysql
     links: 
       - database
 
   client: 
     build: ./client
-    image: etherfuse/client:0.0
+    image: etherfuse/client:0.1
     volumes: 
-      - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      #- "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./client/app:/usr/src/app
   
 volumes:
