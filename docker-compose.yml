@@ -21,6 +21,12 @@ services:
       - ./database/create_mysql:/root/create_mysql
     links: 
       - database
+      - test
+
+  test: 
+    image: hypriot/rpi-mysql:5.5
+    environment: 
+       MYSQL_ALLOW_EMPTY_PASSWORD: yes 
 
   client: 
     build: ./client
