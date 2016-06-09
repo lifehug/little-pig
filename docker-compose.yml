@@ -22,8 +22,9 @@ services:
     links: 
       - database
 
-  test: 
-    image: ioft/armhf-debian
+  ping: 
+    build: ./ping
+    image: etherfuse/ping:0.1
     links: 
       - snort
 
