@@ -21,10 +21,11 @@ services:
       - ./database/create_mysql:/root/create_mysql
     links: 
       - database
-      - test
 
   test: 
     image: ioft/armhf-debian
+    links: 
+      - snort
 
   client: 
     build: ./client
