@@ -96,8 +96,9 @@ RUN chown snort.snort /var/log/snort/barnyard2.waldo
 
 WORKDIR ${home}
 
-CMD ["/bin/bash", "/usr/local/bin/snort -q -u snort -g snort -c /etc/snort/snort.conf -i eth0 & && /usr/local/bin/barnyard2 -c /etc/snort/barnyard2.conf -d /var/log/snort -f snort.u2 -q -w /var/log/snort/barnyard2.waldo -g snort -u snort -D -a /var/log/snort/archived_logs"]
-
-
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
 
 
