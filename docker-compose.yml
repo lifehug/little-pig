@@ -14,25 +14,26 @@ services:
      #- /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
   
   snort: 
-    build: ./snort
+    # build: ./snort
     image: etherfuse/snort:0.1
     volumes:
-      #- "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./database/create_mysql:/root/create_mysql
     links: 
       - database
 
   ping: 
-    build: ./ping
+    # build: ./ping
     image: etherfuse/ping:0.1
     links: 
       - snort
+      - database
 
   client: 
-    build: ./client
+    # build: ./client
     image: etherfuse/client:0.1
     volumes: 
-      #- "${QEMU_PATH}:/usr/bin/qemu-arm-static"
+      # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./client/app:/usr/src/app
   
 volumes:
