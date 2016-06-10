@@ -1,1 +1,23 @@
 # Add extra etherfuse tables
+
+# Schema https://www.andrew.cmu.edu/user/rdanyliw/snort/acid_db_er_v102.html
+
+CREATE TABLE profile ( id INT UNSIGNED NOT NULL,
+                      firstname    VARCHAR(35),
+                      lastname    VARCHAR(35),
+                      email    VARCHAR(100),
+                      network    TINYINT,
+                      PRIMARY KEY (id));
+
+
+CREATE VIEW associated AS SELECT id, mac FROM profile, device;
+
+CREATE TABLE device (mac BIGINT UNSIGNED NOT NULL,
+                     ip_addr INT UNSIGNED NOT NULL,
+                     src_prt INT UNSIGNED NOT NULL,
+                     discovered DATETIME NOT NULL, 
+                     last_seen DATETIME NOT NULL,
+                      os VARCHAR(35), 
+                      os_details VARCHAR(255),
+                      name VARCHAR(100),
+                      PRIMARY KEY (mac));
