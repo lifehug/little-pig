@@ -9,9 +9,6 @@ CREATE TABLE profile ( id INT UNSIGNED NOT NULL,
                       network    TINYINT,
                       PRIMARY KEY (id));
 
-
-CREATE VIEW associated AS SELECT id, mac FROM profile, device;
-
 CREATE TABLE device (mac BIGINT UNSIGNED NOT NULL,
                      ip_addr INT UNSIGNED NOT NULL,
                      src_prt INT UNSIGNED NOT NULL,
@@ -21,3 +18,6 @@ CREATE TABLE device (mac BIGINT UNSIGNED NOT NULL,
                       os_details VARCHAR(255),
                       name VARCHAR(100),
                       PRIMARY KEY (mac));
+
+
+CREATE VIEW associated AS SELECT id, mac FROM profile, device;
