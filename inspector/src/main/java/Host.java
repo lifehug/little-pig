@@ -27,4 +27,8 @@ public class Host{
     return os;
   }
 
+  public String toString(){
+    return "ip: " + addr.toString().replace("/", "") + " mac: " + mac + " os: " + os + "\n";
+  } 
+
 }
