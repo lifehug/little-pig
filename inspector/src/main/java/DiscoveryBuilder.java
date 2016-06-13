@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class DiscoveryCreator{
+public class DiscoveryBuilder{
 
-  String fileName;
+  String filename;
 
-  public DiscoveryCreator(String fileName){
-    this.fileName = fileName;
+  public DiscoveryBuilder setFilename(String filename){
+    this.filename = filename;
+    return this;
   }
 
   public Discovery create() throws Exception{
@@ -28,11 +29,11 @@ public class DiscoveryCreator{
     List<String> lines;
 
 
-      if(fileName == null){
+      if(filename == null){
        throw new Exception("host discovery file is null or does not exist");
       }
       
-      lines = Files.readAllLines(Paths.get(fileName));
+      lines = Files.readAllLines(Paths.get(filename));
       for(String line : lines){
 
         if(line.startsWith("MAC Address: ")){

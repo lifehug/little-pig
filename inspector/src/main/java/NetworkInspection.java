@@ -16,7 +16,7 @@ public class NetworkInspection{
 
       Process p = Runtime.getRuntime().exec("nmap -sP " + network + " > " + filename);
       p.waitFor();
-      Discovery discovery = new DiscoveryCreator(filename).create();
+      Discovery discovery = new DiscoveryBuilder().setFilename(filename).create();
 
       // save the details to the database
     } catch (Exception e){

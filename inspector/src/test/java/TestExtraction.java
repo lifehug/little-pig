@@ -1,14 +1,14 @@
 import org.junit.Test;
 import org.junit.Ignore;
 import static org.junit.Assert.assertEquals;
-import com.etherfuse.inspector.DiscoveryCreator;
+import com.etherfuse.inspector.DiscoveryBuilder;
 
 public class TestExtraction{
-   DiscoveryCreator parse;
+   DiscoveryBuilder parse;
    
    // assigning the values
    protected void setUp(){
-       DiscoveryCreator parse = new DiscoveryCreator("filename");
+       DiscoveryBuilder parse = new DiscoveryBuilder();
    }
 
 
