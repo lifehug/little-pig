@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
+import java.util.Iterator;
 
 public class Discovery{
   String discovery;
@@ -22,8 +23,8 @@ public class Discovery{
     return dateTime;
   }
 
-  public List<Host> getHosts(){
-    return hosts;
+  public Iterator<Host> hostsIterator(){
+   return hosts.iterator();
   }
 
   public String toString(){

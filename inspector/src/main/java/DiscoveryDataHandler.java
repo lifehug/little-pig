@@ -6,6 +6,11 @@ import java.sql.Connection;
 import java.lang.Integer;
 import java.sql.SQLException;
 import java.sql.DriverManager;
+import java.util.Arrays;
+import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Iterator;
+
 
 public class DiscoveryDataHandler{
 
@@ -17,61 +22,36 @@ public class DiscoveryDataHandler{
 
   }
 
-  public void save() throws SQLException {
+  public void save() throws Exception {
     
     connection = getConnection();
-    Date date = Date.valueOf(discovery.getDate());
-    Iterator<Host> it = discovery.hostIterator();
+    LocalDateTime date = discovery.getDate();
+    Iterator<Host> it = discovery.hostsIterator();
     StringBuilder insertionQuery = new StringBuilder();
 
     Statement st = connection.createStatement();
     while (it.hasNext()){
+      Host host = it.next();
       String entry = getQuery(host, date);
       st.addBatch(entry);
     }
 
-
-    ResultSet results = st.executeBatch();
+    int[] outcome = st.executeBatch();
+    Arrays.parallelSort(outcome);
+    if(outcome[0] == Statement.EXECUTE_FAILED) throw new Exception("You're database query didn't work");
     // verify the result set
   }
 
-
-// Update Users set weight=160, desiredWeight=145  WHERE id = 1;
-
-  public String getQuery(String mac, String os, String ip_addr, Date last_seen, Date discovered){
+  public String getQuery(Host host, LocalDateTime last_seen){
+    String mac = host.getMAC();
+    String os = host.getOS();
+    int ip_addr = host.getIPAddress();
     String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
     "UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", os=" + os + " WHERE mac = " + mac + ";";
     return query; 
   }
 
-
-  // public String executeQuery(Host host, Date last_seen) throws SQLException{
-
-  //   Date discovered = last_seen
-  //   Optional<Date> possibleDate = executeDiscoveredQuery(Host host);
-
-  //   if(possibleDate.isPresent()){
-  //     discovered = possibleDate.get();
-  //   }
-   
-  //   return getHostDetailQuery(host.getMAC(), host.getOS(), Integer.toString(host.getIPAddress()), last_seen, discovered) 
-
-  // }
-
-  public Optional<Date> executeDiscoveredQuery(Host host) throws SQLException {
-    
-    Connection conn = getConnection();
-    Statement st = conn.createStatement();
-    ResultSet results = st.executeQuery( getDiscoveredQuery(host.getMAC()));
-    Date discovered = results.getDate("discovered");
-    Optional<Date> possibleDiscoveredDate = Optional.of(discovered.toString());
-    return possibleDiscoveredDate; 
-
-  }
-
-
-
-  public Connection getConnection(){
+  public Connection getConnection() throws Exception{
 
     if(connection == null){
 

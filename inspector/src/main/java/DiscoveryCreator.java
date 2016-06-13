@@ -67,8 +67,4 @@ public class DiscoveryCreator{
     return StringUtils.substringAfter(time, "( https://nmap.org ) at ");
   }
 
-  public Iterator<host>  hostsIterator(){
-   return hosts.iterator();
-  }
-
 }

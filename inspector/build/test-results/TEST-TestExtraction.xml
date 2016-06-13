@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestExtraction" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-06-13T00:20:58" hostname="Davids-MacBook.local" time="0.01">
+<testsuite name="TestExtraction" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-06-13T02:47:42" hostname="Davids-MacBook.local" time="0.009">
   <properties/>
-  <testcase name="testMAC" classname="TestExtraction" time="0.009"/>
+  <testcase name="testMAC" classname="TestExtraction" time="0.008"/>
   <testcase name="testDate" classname="TestExtraction" time="0.0"/>
   <testcase name="testIP" classname="TestExtraction" time="0.0"/>
   <testcase name="testOS" classname="TestExtraction" time="0.0"/>
