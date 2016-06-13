@@ -8,7 +8,7 @@ public class TestExtraction{
    
    // assigning the values
    protected void setUp(){
-       DiscoveryCreator parse = new DiscoveryCreator();
+       DiscoveryCreator parse = new DiscoveryCreator("filename");
    }
 
 

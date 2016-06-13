@@ -72,7 +72,7 @@ set CMD_LINE_ARGS=%$
 set CLASSPATH=%APP_HOME%\lib\inspector.jar;%APP_HOME%\lib\guava-19.0.jar;%APP_HOME%\lib\commons-lang3-3.4.jar
 
 @rem Execute inspector
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %INSPECTOR_OPTS%  -classpath "%CLASSPATH%" com.etherfuse.inspector.Parser %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %INSPECTOR_OPTS%  -classpath "%CLASSPATH%" com.etherfuse.inspector.NetworkInspection %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

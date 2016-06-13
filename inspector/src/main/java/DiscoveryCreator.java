@@ -17,7 +17,7 @@ public class DiscoveryCreator{
     this.fileName = fileName;
   }
 
-  public Discovery create(){
+  public Discovery create() throws Exception{
     
     Discovery discovery;
     String macAddress = "";
@@ -27,7 +27,6 @@ public class DiscoveryCreator{
     List<Host> hosts = new ArrayList<Host>();
     List<String> lines;
 
-    try {
 
       if(fileName == null){
        throw new Exception("host discovery file is null or does not exist");
@@ -48,12 +47,6 @@ public class DiscoveryCreator{
 
       }
 
-
-
-    } catch (Exception e){
-      e.printStackTrace();
-    }
-
     return new Discovery(time, hosts);
   }
 
@@ -72,6 +65,10 @@ public class DiscoveryCreator{
 
   public static String getTime(String time){
     return StringUtils.substringAfter(time, "( https://nmap.org ) at ");
+  }
+
+  public Iterator<host>  hostsIterator(){
+   return hosts.iterator();
   }
 
 }
