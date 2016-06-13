@@ -13,10 +13,7 @@ public class NetworkInspection{
       // call nmap for the discovery and pipe it to a filename
       String filename = "output.txt";
       String network = "198.162.1.0/24";
-
-      Process p = Runtime.getRuntime().exec("nmap -sP " + network + " > " + filename);
-      p.waitFor();
-      Discovery discovery = new DiscoveryBuilder().setFilename(filename).create();
+      Discovery discovery = new DiscoveryBuilder().setNetwork(network).setFilename(filename).setDiscoveryType(new NmapSPType()).create();
 
       // save the details to the database
     } catch (Exception e){
