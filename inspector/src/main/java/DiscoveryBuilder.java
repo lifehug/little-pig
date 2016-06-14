@@ -30,7 +30,7 @@ public class DiscoveryBuilder{
     return this;
   }
 
-  public void run(){
+  public void run() throws Exception{
 
     discoveryType.execute(network, filename);
 

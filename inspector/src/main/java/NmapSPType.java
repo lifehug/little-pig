@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class NmapSPType implements Type{
 
-  public void execute(String network, String outputFile){
+  public void execute(String network, String outputFile) throws Exception{
 
       Process p = Runtime.getRuntime().exec("nmap -sP " + network + " > " + outputFile);
       p.waitFor();
@@ -27,7 +27,7 @@ public class NmapSPType implements Type{
     String time = "";
     List<Host> hosts = new ArrayList<Host>();
     List<String> lines;
-
+d
 
       if(filename == null){
        throw new Exception("host discovery file is null or does not exist");
