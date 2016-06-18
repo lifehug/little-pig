@@ -7,13 +7,22 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
+import java.io.File;
+import java.lang.ProcessBuilder;
 
 public class NmapSPType implements Type{
 
   public void execute(String network, String outputFile) throws Exception{
+    
+      ProcessBuilder builder = new ProcessBuilder("nmap", "-sP", network);
+      builder.redirectOutput(new File(outputFile));
+      builder.redirectError(new File(outputFile));
+      Process p = builder.start(); // throws IOException
+      int errCode = p.waitFor();
 
-      Process p = Runtime.getRuntime().exec("nmap -sP " + network + " > " + outputFile);
-      p.waitFor();
+      if(errCode != 0){
+        throw new Exception("Process Not Executed");
+      }
 
   }
   
@@ -27,7 +36,7 @@ public class NmapSPType implements Type{
     String time = "";
     List<Host> hosts = new ArrayList<Host>();
     List<String> lines;
-d
+
 
       if(filename == null){
        throw new Exception("host discovery file is null or does not exist");

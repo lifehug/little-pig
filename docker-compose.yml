@@ -35,6 +35,11 @@ services:
     volumes: 
       # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./client/app:/usr/src/app
+
+  inspector: 
+    build: ./inspector
+    links: 
+      - database
   
 volumes:
   data:

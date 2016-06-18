@@ -37,7 +37,7 @@ public class DiscoveryBuilder{
   }
 
   public Discovery create() throws Exception{
-     
+    run();
     return discoveryType.parse(filename);
 
   }
