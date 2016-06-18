@@ -30,15 +30,16 @@ public class DiscoveryBuilder{
     return this;
   }
 
-  public void run() throws Exception{
-
+  public DiscoveryBuilder run() throws Exception{
+    // I'm guessing that this may not work
     discoveryType.execute(network, filename);
+    return this;
 
   }
 
   public Discovery create() throws Exception{
-    run();
-    return discoveryType.parse(filename);
+
+    return run().discoveryType.parse(filename);
 
   }
 

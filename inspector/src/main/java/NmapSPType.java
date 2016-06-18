@@ -61,4 +61,21 @@ public class NmapSPType implements Type{
 
   }
 
+
+  public String getOS(String line){
+    return StringUtils.substringBetween(line, "(", ")");
+  }
+
+  public String getMAC(String line){
+    return StringUtils.substringBetween(line, "MAC Address: ", " (");
+  }
+
+  public String getTime(String line){
+    return StringUtils.substringAfter(line, "( https://nmap.org ) at ");
+  }
+
+  public String getIP(String line){
+    return StringUtils.substringAfter(line, "Nmap scan report for ");
+  }
+
 }

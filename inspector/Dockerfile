@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /root/inspector
 COPY . /root/inspector
 RUN ./gradlew build
-CMD ["./gradlew", "run"]
+#CMD ["./gradlew", "run"]

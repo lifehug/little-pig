@@ -13,7 +13,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 run {
-  args += 'output.txt'
+  args += '172.20.9.0/24'
 }
 
 mainClassName = "com.etherfuse.inspector.NetworkInspection"

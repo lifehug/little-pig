@@ -17,14 +17,13 @@ public class DiscoveryDataHandler{
   Discovery discovery;
   Connection connection;
 
-  public DiscoveryDataHandler(Discovery discovery){
+  public DiscoveryDataHandler(Discovery discovery, Connection connection){
     this.discovery = discovery;
-
+    this.connection = connection;
   }
 
   public void save() throws Exception {
     
-    connection = getConnection();
     LocalDateTime date = discovery.getDate();
     Iterator<Host> it = discovery.hostsIterator();
     StringBuilder insertionQuery = new StringBuilder();
@@ -46,27 +45,12 @@ public class DiscoveryDataHandler{
     String mac = host.getMAC();
     String os = host.getOS();
     int ip_addr = host.getIPAddress();
-    String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
-    "UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", os=" + os + " WHERE mac = " + mac + ";";
+    String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS ( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
+    " UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", os=" + os + " WHERE mac = " + mac + ";";
     return query; 
   }
 
-  public Connection getConnection() throws Exception{
 
-    if(connection == null){
-
-      // get this data from a properties file
-      String url = "jdbc:mysql://database:3306/snort";
-      String user = "snort";
-      String password = "Wdnb6EV2x6nNaVuDzeaZ2N9MFbtz3J8YBciz34wkvpkyGT8Apq";
-      // Load the Connector/J driver
-      Class.forName("com.mysql.jdbc.Driver").newInstance();
-      connection = DriverManager.getConnection(url, user, password);
-    }
-
-    return connection;
-
-  }
 
 }
 
