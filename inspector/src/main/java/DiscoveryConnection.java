@@ -12,7 +12,7 @@ public class DiscoveryConnection{
 
   }
 
-  public Connection getConnection() throws Exception{
+  public static Connection getConnection() throws Exception{
 
     if(connection == null){
 

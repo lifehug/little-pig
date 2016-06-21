@@ -13,7 +13,15 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 run {
-  args += '172.20.9.0/24'
+  args += '192.168.1.0/24'
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'Inspector',
+                'Implementation-Version': 0.1,
+                'Main-Class': 'com.etherfuse.inspector.NetworkInspection'
+  }
 }
 
 mainClassName = "com.etherfuse.inspector.NetworkInspection"

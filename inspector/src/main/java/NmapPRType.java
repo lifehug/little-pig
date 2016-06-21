@@ -10,11 +10,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.lang.ProcessBuilder;
 
-public class NmapSPType implements Type{
+public class NmapPRType implements Type{
 
   public void execute(String network, String outputFile) throws Exception{
     
-      ProcessBuilder builder = new ProcessBuilder("nmap", "-sn", network);
+      ProcessBuilder builder = new ProcessBuilder("nmap", "-PR", network);
       builder.redirectOutput(new File(outputFile));
       builder.redirectError(new File(outputFile));
       Process p = builder.start(); // throws IOException
@@ -46,13 +46,13 @@ public class NmapSPType implements Type{
       for(String line : lines){
 
         if(line.startsWith("MAC Address: ")){
-          macAddress = StringUtils.substringBetween(line, "MAC Address: ", " (");
-          operatingSystem = StringUtils.substringBetween(line, "(", ")");
+          macAddress = getMAC(line);
+          operatingSystem = getOS(line);
           hosts.add(new Host(ipAddress, macAddress, operatingSystem));
         } else if(line.startsWith("Nmap scan report for")){
-          ipAddress = StringUtils.substringAfter(line, "Nmap scan report for ");
+          ipAddress = getIP(line);
         } else if(line.startsWith("Starting Nmap")){
-          time = StringUtils.substringAfter(line, "( https://nmap.org ) at ");
+          time = getTime(line);
         }
 
       }
@@ -75,7 +75,7 @@ public class NmapSPType implements Type{
   }
 
   public String getIP(String line){
-    return StringUtils.substringAfter(line, "Nmap scan report for ");
+    return StringUtils.substringBetween(line, "(", ")");
   }
 
 }
