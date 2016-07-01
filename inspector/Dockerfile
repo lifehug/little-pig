@@ -6,7 +6,7 @@ ENV home /root/inspector
 #ENV GRADLE_HOME ${home}/${gradle}/bin
 
 RUN apt-get update \
-  && apt-get install nmap \
+  && apt-get install -y nmap \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -17,5 +17,6 @@ WORKDIR ${home}
 
 COPY . ${home}
 RUN ./gradlew build
+RUN ./gradlew run
 
 # run the command with input from the docker file

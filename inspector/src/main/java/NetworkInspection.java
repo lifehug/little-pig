@@ -14,6 +14,7 @@ public class NetworkInspection{
       // call nmap for the discovery and pipe it to a filename
       String filename = "output.txt";
       String network = args[0];
+      System.out.println(network);
       Discovery discovery = new DiscoveryBuilder().setNetwork(network).setFilename(filename).setDiscoveryType(new NmapPRType()).create();
       System.out.println(discovery);
 
