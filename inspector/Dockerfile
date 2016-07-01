@@ -1,5 +1,5 @@
-FROM java:8
-#hypriot/rpi-java
+#FROM java:8
+FROM hypriot/rpi-java
 
 ENV home /root/inspector
 #ENV gradle gradle-2.14-bin.zip
@@ -16,7 +16,7 @@ WORKDIR ${home}
 #RUN unzip ${gradle} -d ${home}
 
 COPY . ${home}
-RUN ./gradlew build
-RUN ./gradlew run
+#RUN ./gradlew build
+#RUN ./gradlew run
 
 # run the command with input from the docker file

@@ -38,9 +38,10 @@ services:
 
   inspector: 
     build: ./inspector
-    links: 
-      - database
-  
+    network_mode: host
+    volumes_from: 
+      - database 
+
 volumes:
   data:
 
