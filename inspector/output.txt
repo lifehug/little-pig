@@ -1,0 +1,11 @@
+
+Starting Nmap 7.00 ( https://nmap.org ) at 2016-07-02 08:16 PDT
+Nmap scan report for Pumphouse (192.168.1.1)
+Host is up (0.0028s latency).
+Nmap scan report for kindle-6b8dcf313.hsd1.ca.comcast.net (192.168.1.118)
+Host is up (0.017s latency).
+Nmap scan report for black-pearl.hsd1.ca.comcast.net (192.168.1.119)
+Host is up (0.016s latency).
+Nmap scan report for Davids-MacBook.hsd1.ca.comcast.net (192.168.1.126)
+Host is up (0.0030s latency).
+Nmap done: 256 IP addresses (4 hosts up) scanned in 2.68 seconds

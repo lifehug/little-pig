@@ -12,7 +12,7 @@
 apply plugin: 'java'
 
 task(sweep, type: JavaExec) {
-  
+  classpath = sourceSets.main.runtimeClasspath
   main = 'com.etherfuse.inspector.NetworkInspection'
 
   if(project.hasProperty('net')){

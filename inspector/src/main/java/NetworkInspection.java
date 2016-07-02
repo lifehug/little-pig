@@ -8,7 +8,7 @@ public class NetworkInspection{
   public static void main(String args[]){
 
     try {
-      System.out.println(args[0]);
+
       if(args.length < 1) throw new Exception("Network argument must be provided : " + args[0]);
       // may be able to pull local network automatically from uname -a or something
       // call nmap for the discovery and pipe it to a filename
