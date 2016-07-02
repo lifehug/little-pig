@@ -7,6 +7,7 @@ ENV home /root/inspector
 
 RUN apt-get update \
   && apt-get install -y nmap \
+  && apt-get install -y mysql-client \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
