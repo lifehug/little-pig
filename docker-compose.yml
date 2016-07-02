@@ -11,7 +11,6 @@ services:
       MYSQL_PASSWORD: Wdnb6EV2x6nNaVuDzeaZ2N9MFbtz3J8YBciz34wkvpkyGT8Apq
     volumes:
       - data:/var/lib/mysql
-     #- /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
     ports: 
      - "3306:3306"
     networks:
@@ -21,7 +20,6 @@ services:
     # build: ./snort
     image: etherfuse/snort:0.1
     volumes:
-      # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./database/create_mysql:/root/create_mysql
     networks: 
       - database
@@ -36,7 +34,6 @@ services:
     # build: ./client
     image: etherfuse/client:0.1
     volumes: 
-      # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./client/app:/usr/src/app
 
   inspector: 
