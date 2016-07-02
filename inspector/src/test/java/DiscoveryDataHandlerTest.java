@@ -17,7 +17,7 @@ public class DiscoveryDataHandlerTest{
    
    @Before
     public void setUp(){
-      host = new Host("172.168.1.1", "E0:88:5D:D2:6C:53", "Apple");
+      host = new Host("172.168.1.1", "E0:88:5D:D2:6C:53", "Apple", null);
       List<Host> hosts = new ArrayList<Host>();
       hosts.add(host);
       discovery = new Discovery("2016-06-17 00:44 EDT", hosts);

@@ -31,15 +31,13 @@ public class DiscoveryBuilder{
   }
 
   public DiscoveryBuilder run() throws Exception{
-    // I'm guessing that this may not work
-    discoveryType.execute(network, filename);
+    discoveryType.execute(network);
     return this;
-
   }
 
   public Discovery create() throws Exception{
 
-    return run().discoveryType.parse(filename);
+    return run().discoveryType.parse();
 
   }
 

@@ -8,27 +8,43 @@ public class Host{
   InetAddress addr;
   String mac; 
   String os;
+  String hostname;
 
-  public Host(String ip, String mac, String os){
+  public Host(String ip, String mac, String os, String hostname){
     this.addr = InetAddresses.forString(ip);
     this.mac = mac;
     this.os = os;
+    this.hostname = hostname; 
+  }
+
+  public Host(String ip, String hostname){
+    this.addr = InetAddresses.forString(ip);
+    this.hostname = hostname; 
   }
 
   public int getIPAddress(){
-    return InetAddresses.coerceToInteger(addr);
+    return (addr == null ? 0 : InetAddresses.coerceToInteger(addr));
   }
 
   public String getMAC(){
-    return mac;
+    return (mac == null ? "" : mac);
   }
 
   public String getOS(){
-    return os;
+    return (os == null ? "" : os);
+  }
+
+  public String getHostname(){
+    return (hostname == null ? "" : hostname);
   }
 
   public String toString(){
-    return "ip: " + addr.toString().replace("/", "") + " mac: " + mac + " os: " + os + "\n";
+    String result = (addr == null ? "" : "ip: " + addr.toString().replace("/", "") + " ");
+    result += (mac == null ?  "" : " mac: " + getMAC() + " ");
+    result += (os == null ? "" : " os: " + getOS() + " ");
+    result += (hostname == null ? "" : " interface :" + getHostname() + " ");
+    result += "\n";
+    return result;
   } 
 
 }

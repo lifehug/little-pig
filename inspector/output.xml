@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/local/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.00 scan initiated Sat Jul  2 08:52:13 2016 as: nmap -sn -oA output 192.168.1.0/24 -->
+<nmaprun args="nmap -sn -oA output 192.168.1.0/24" scanner="nmap" start="1467474733" startstr="Sat Jul  2 08:52:13 2016" version="7.00" xmloutputversion="1.04">
+  <verbose level="0"/>
+  <debugging level="0"/>
+  <host>
+    <status reason="arp-response" reason_ttl="0" state="up"/>
+    <address addr="192.168.1.1" addrtype="ipv4"/>
+    <address addr="C0:56:27:6F:22:21" addrtype="mac" vendor="Belkin International"/>
+    <hostnames>
+      <hostname name="Pumphouse" type="PTR"/>
+    </hostnames>
+    <times rttvar="5074" srtt="4037" to="100000"/>
+  </host>
+  <host>
+    <status reason="arp-response" reason_ttl="0" state="up"/>
+    <address addr="192.168.1.118" addrtype="ipv4"/>
+    <address addr="10:AE:60:EE:9E:FE" addrtype="mac" vendor="Private"/>
+    <hostnames>
+      <hostname name="kindle-6b8dcf313.hsd1.ca.comcast.net" type="PTR"/>
+    </hostnames>
+    <times rttvar="16684" srtt="16684" to="100000"/>
+  </host>
+  <host>
+    <status reason="arp-response" reason_ttl="0" state="up"/>
+    <address addr="192.168.1.119" addrtype="ipv4"/>
+    <address addr="B8:27:EB:FB:2A:90" addrtype="mac" vendor="Raspberry Pi Foundation"/>
+    <hostnames>
+      <hostname name="black-pearl.hsd1.ca.comcast.net" type="PTR"/>
+    </hostnames>
+    <times rttvar="8580" srtt="8580" to="100000"/>
+  </host>
+  <host>
+    <status reason="arp-response" reason_ttl="0" state="up"/>
+    <address addr="192.168.1.149" addrtype="ipv4"/>
+    <address addr="28:5A:EB:78:F4:E9" addrtype="mac" vendor="Apple"/>
+    <hostnames>
+      <hostname name="Davids-iPhone-2.hsd1.ca.comcast.net" type="PTR"/>
+    </hostnames>
+    <times rttvar="87693" srtt="87693" to="438465"/>
+  </host>
+  <host>
+    <status reason="localhost-response" reason_ttl="0" state="up"/>
+    <address addr="192.168.1.126" addrtype="ipv4"/>
+    <hostnames>
+      <hostname name="Davids-MacBook.hsd1.ca.comcast.net" type="PTR"/>
+    </hostnames>
+  </host>
+  <runstats>
+    <finished elapsed="2.24" exit="success" summary="Nmap done at Sat Jul  2 08:52:16 2016; 256 IP addresses (5 hosts up) scanned in 2.24 seconds" time="1467474736" timestr="Sat Jul  2 08:52:16 2016"/>
+    <hosts down="251" total="256" up="5"/>
+  </runstats>
+</nmaprun>

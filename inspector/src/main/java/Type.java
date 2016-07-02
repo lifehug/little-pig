@@ -1,6 +1,6 @@
 package com.etherfuse.inspector;
 
 public interface Type{
-  public Discovery parse(String filename) throws Exception;
-  public void execute(String network, String outputFile) throws Exception;
+  public Discovery parse() throws Exception;
+  public void execute(String network) throws Exception;
 }

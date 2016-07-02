@@ -12,12 +12,11 @@ import java.lang.ProcessBuilder;
 
 public class NmapPRType implements Type{
 
-  public void execute(String network, String outputFile) throws Exception{
+  public void execute(String network) throws Exception{
     
-      ProcessBuilder builder = new ProcessBuilder("nmap", "-PR", network);
-      builder.redirectOutput(new File(outputFile));
-      builder.redirectError(new File(outputFile));
-      Process p = builder.start(); // throws IOException
+      ProcessBuilder builder = new ProcessBuilder("nmap", "-PR", network, "-oX", "output");
+      builder.redirectError(new File("error.log"));
+      Process p = builder.start(); 
       int errCode = p.waitFor();
 
       if(errCode != 0){
@@ -26,31 +25,29 @@ public class NmapPRType implements Type{
 
   }
   
-  public Discovery parse(String filename) throws Exception {
+  public Discovery parse() throws Exception {
 
     // create a ParserType that overrides parese
     Discovery discovery;
     String macAddress = "";
     String ipAddress = "";
     String operatingSystem = "";
+    String interfaceName = "";
     String time = "";
     List<Host> hosts = new ArrayList<Host>();
     List<String> lines;
-
-
-      if(filename == null){
-       throw new Exception("host discovery file is null or does not exist");
-      }
       
-      lines = Files.readAllLines(Paths.get("output.txt"));
+      lines = Files.readAllLines(Paths.get("output.nmap"));
+      System.out.println(lines);
       for(String line : lines){
 
         if(line.startsWith("MAC Address: ")){
           macAddress = getMAC(line);
           operatingSystem = getOS(line);
-          hosts.add(new Host(ipAddress, macAddress, operatingSystem));
+          hosts.add(new Host(ipAddress, macAddress, operatingSystem, interfaceName));
         } else if(line.startsWith("Nmap scan report for")){
           ipAddress = getIP(line);
+          interfaceName = getInterfaceName(line);
         } else if(line.startsWith("Starting Nmap")){
           time = getTime(line);
         }
@@ -76,6 +73,10 @@ public class NmapPRType implements Type{
 
   public String getIP(String line){
     return StringUtils.substringBetween(line, "(", ")");
+  }
+
+  public String getInterfaceName(String line){
+    return StringUtils.substringBetween(line, "Nmap scan report for ", " (");
   }
 
 }
