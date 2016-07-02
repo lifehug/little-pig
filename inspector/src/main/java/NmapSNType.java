@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.lang.ProcessBuilder;
 
-public class NmapSPType implements Type{
+public class NmapSNType implements Type{
 
   public void execute(String network, String outputFile) throws Exception{
     

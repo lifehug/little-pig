@@ -2,15 +2,15 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.Ignore;
 import static org.junit.Assert.*;
-import com.etherfuse.inspector.NmapSPType;
+import com.etherfuse.inspector.NmapSNType;
 
-public class NmapSPTypeTest{
-   NmapSPType parse;// = new NmapSPType();
+public class NmapSNTypeTest{
+   NmapSNType parse;// = new NmapSPType();
    
    // assigning the values
    @Before
     public void setUp(){
-       parse = new NmapSPType();
+       parse = new NmapSNType();
 
    }
 

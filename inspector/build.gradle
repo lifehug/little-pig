@@ -10,10 +10,14 @@
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
-apply plugin: 'application'
 
-run {
-  args += '192.168.1.0/24'
+task(sweep, type: JavaExec) {
+  
+  if(project.hasProperty('net')){
+    args Eval.me(net)
+  }
+
+  main = "com.etherfuse.inspector.NetworkInspection"
 }
 
 jar {
@@ -23,8 +27,6 @@ jar {
                 'Main-Class': 'com.etherfuse.inspector.NetworkInspection'
   }
 }
-
-mainClassName = "com.etherfuse.inspector.NetworkInspection"
 
 repositories {
     jcenter()

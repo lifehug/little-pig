@@ -2,8 +2,9 @@
 FROM hypriot/rpi-java
 
 ENV home /root/inspector
-#ENV gradle gradle-2.14-bin.zip
-#ENV GRADLE_HOME ${home}/${gradle}/bin
+ENV gradle gradle-2.14
+ENV GRADLE_HOME ${home}/${gradle}
+ENV PATH=$PATH:$GRADLE_HOME/bin
 
 RUN apt-get update \
   && apt-get install -y nmap \
@@ -13,11 +14,11 @@ RUN apt-get update \
 
 WORKDIR ${home}
 
-#ADD https://services.gradle.org/distributions/${gradle} ${gradle}
-#RUN unzip ${gradle} -d ${home}
+ADD https://services.gradle.org/distributions/${gradle}-bin.zip ${gradle}-bin.zip
+RUN unzip ${gradle}-bin.zip -d ${home}
 
 COPY . ${home}
-#RUN ./gradlew build
-#RUN ./gradlew run
+RUN gradle build
 
-# run the command with input from the docker file
+# the network will be passed in at run time
+# RUN gradle sweep '-Pnet=192.168.1.0/24'
