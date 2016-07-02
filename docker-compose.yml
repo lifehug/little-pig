@@ -12,21 +12,24 @@ services:
     volumes:
       - data:/var/lib/mysql
      #- /tmp/qemu-static/qemu-arm-static:/usr/bin/qemu-arm-static
-  
+    ports: 
+     - "3306:3306"
+    networks:
+     - database
+ 
   snort: 
     # build: ./snort
     image: etherfuse/snort:0.1
     volumes:
       # - "${QEMU_PATH}:/usr/bin/qemu-arm-static"
       - ./database/create_mysql:/root/create_mysql
-    links: 
+    networks: 
       - database
 
   ping: 
     # build: ./ping
     image: etherfuse/ping:0.1
-    links: 
-      - snort
+    networks: 
       - database
 
   client: 
@@ -45,4 +48,5 @@ services:
 volumes:
   data:
 
-
+networks: 
+  database:
