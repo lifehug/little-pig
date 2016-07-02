@@ -15,7 +15,7 @@ public class NetworkInspection{
       String filename = "output.txt";
       String network = args[0];
       System.out.println(network);
-      Discovery discovery = new DiscoveryBuilder().setNetwork(network).setFilename(filename).setDiscoveryType(new NmapPRType()).create();
+      Discovery discovery = new DiscoveryBuilder().setNetwork(network).setFilename(filename).setDiscoveryType(new NmapSNType()).create();
       System.out.println(discovery);
 
       //Connection connection = DiscoveryConnection.getConnection();
