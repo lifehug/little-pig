@@ -13,13 +13,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class NmapSNType implements Type{
 
   public void execute(String network) throws Exception{
     
-      ProcessBuilder builder = new ProcessBuilder("nmap", "-sn", network, "-oX", "output");
+      ProcessBuilder builder = new ProcessBuilder("nmap", "-sn", network, "-oX", "output.xml");
       builder.redirectError(new File("error.log"));
       Process p = builder.start();
       int errCode = p.waitFor();
@@ -37,30 +38,63 @@ public class NmapSNType implements Type{
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document document = builder.parse(Paths.get("output.xml").toFile());
-    NodeList node = document.getElementsByTagName("nmaprun");
-    NodeList hostsAttrs = document.getElementsByTagName("host");
-    Node runData = node.item(0);
-    //args="nmap -sn -oA output 192.168.1.0/24" scanner="nmap" start="1467474733" startstr="Sat Jul  2 08:52:13 2016" 
+    
+    // discovery event data
+    NodeList nmapRun = document.getElementsByTagName("nmaprun");
+    NamedNodeMap runData = nmapRun.item(0).getAttributes();
+    String args = runData.getNamedItem("args").getNodeValue();
+    String time = runData.getNamedItem("startstr").getNodeValue();
 
-    return new Discovery(null, null, null);
+    // host details
+    NodeList hostList = document.getElementsByTagName("host");
 
-  }
+    // iterate through all the hosts
+    for(int i = 0; i < hostList.getLength(); i++){
+      
+      Node n = hostList.item(i);
+      NodeList hostData = n.getChildNodes();
+      String address = "";
+      String mac = "";
+      String vendor = "";
+      String hostname = "";
 
+      // iterate through all of the hosts data and find the correct vaules
+      for(int x = 0; x < hostData.getLength(); x++){
+        
+        Node hostDetail = hostData.item(x);
+        if(hostDetail.getNodeName().equals("address")){
+          
+          NamedNodeMap addressDetails = hostDetail.getAttributes();
+          // get the correct address type data
+          if(addressDetails.getNamedItem("addrtype").getNodeValue().equals("mac")){
+            mac = addressDetails.getNamedItem("addr").getNodeValue();
+            vendor = addressDetails.getNamedItem("vendor").getNodeValue();
+          } else {
+            address = addressDetails.getNamedItem("addr").getNodeValue();
+          }
 
-  public String getOS(String line){
-    return StringUtils.substringBetween(line, "(", ")");
-  }
+        } else if(hostDetail.getNodeName().equals("hostnames")){
+          
+          NodeList hostNames = hostDetail.getChildNodes();
+          // iterate through all of hostnames elements and get the hostname name
+          for (int y = 0; y < hostNames.getLength(); y++){
+            Node hostName = hostNames.item(y);
 
-  public String getMAC(String line){
-    return StringUtils.substringBetween(line, "MAC Address: ", " (");
-  }
+            if(hostName.getNodeName().equals("hostname")){
+              NamedNodeMap hostnameAttrs = hostName.getAttributes();
+              hostname = hostnameAttrs.getNamedItem("name").getNodeValue();
+            }
+          }
 
-  public String getTime(String line){
-    return StringUtils.substringAfter(line, "( https://nmap.org ) at ");
-  }
+        }
+     
+      }
 
-  public String getIP(String line){
-    return StringUtils.substringAfter(line, "Nmap scan report for ");
+      hosts.add(new Host(address, mac, vendor, hostname));
+    }
+
+    return new Discovery(time, args, hosts);
+
   }
 
 }

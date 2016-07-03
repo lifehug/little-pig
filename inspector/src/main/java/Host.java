@@ -7,13 +7,13 @@ public class Host{
   
   InetAddress addr;
   String mac; 
-  String os;
+  String vendor;
   String hostname;
 
-  public Host(String ip, String mac, String os, String hostname){
+  public Host(String ip, String mac, String vendor, String hostname){
     this.addr = InetAddresses.forString(ip);
     this.mac = mac;
-    this.os = os;
+    this.vendor = vendor;
     this.hostname = hostname; 
   }
 
@@ -30,8 +30,8 @@ public class Host{
     return (mac == null ? "" : mac);
   }
 
-  public String getOS(){
-    return (os == null ? "" : os);
+  public String getVendor(){
+    return (vendor == null ? "" : vendor);
   }
 
   public String getHostname(){
@@ -41,7 +41,7 @@ public class Host{
   public String toString(){
     String result = (addr == null ? "" : "ip: " + addr.toString().replace("/", "") + " ");
     result += (mac == null ?  "" : " mac: " + getMAC() + " ");
-    result += (os == null ? "" : " os: " + getOS() + " ");
+    result += (vendor == null ? "" : " vendor: " + getVendor() + " ");
     result += (hostname == null ? "" : " interface :" + getHostname() + " ");
     result += "\n";
     return result;

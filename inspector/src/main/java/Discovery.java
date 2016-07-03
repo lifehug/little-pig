@@ -18,8 +18,10 @@ public class Discovery{
   }
 
   public LocalDateTime getDate(){
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm zzz");
+    //"Sat Jul  2 08:52:13 2016"
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM d HH:mm:ss yyyy");
+    // LocalDateTime doesn't have a clean solution for variable whitespace
+    date = date.replaceAll("  +", " ");
     LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 
     return dateTime;

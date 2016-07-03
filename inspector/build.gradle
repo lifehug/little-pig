@@ -16,7 +16,6 @@ task(sweep, type: JavaExec) {
   main = 'com.etherfuse.inspector.NetworkInspection'
 
   if(project.hasProperty('net')){
-    println Eval.me(net)
     args Eval.me(net)
   }
 }

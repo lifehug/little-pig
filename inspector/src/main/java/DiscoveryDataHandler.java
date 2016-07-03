@@ -43,10 +43,10 @@ public class DiscoveryDataHandler{
 
   public String getQuery(Host host, LocalDateTime last_seen){
     String mac = host.getMAC();
-    String os = host.getOS();
+    String vendor = host.getVendor();
     int ip_addr = host.getIPAddress();
     String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS ( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
-    " UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", os=" + os + " WHERE mac = " + mac + ";";
+    " UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", vendor=" + vendor + " WHERE mac = " + mac + ";";
     return query; 
   }
 

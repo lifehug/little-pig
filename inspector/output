@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/local/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.00 scan initiated Sat Jul  2 22:17:47 2016 as: nmap -sn -oX output.xml 192.168.1.0/24 -->
-<nmaprun scanner="nmap" args="nmap -sn -oX output.xml 192.168.1.0/24" start="1467523067" startstr="Sat Jul  2 22:17:47 2016" version="7.00" xmloutputversion="1.04">
+<!-- Nmap 7.00 scan initiated Sat Jul  2 22:16:16 2016 as: nmap -sn -oX output 192.168.1.0/24 -->
+<nmaprun scanner="nmap" args="nmap -sn -oX output 192.168.1.0/24" start="1467522976" startstr="Sat Jul  2 22:16:16 2016" version="7.00" xmloutputversion="1.04">
 <verbose level="0"/>
 <debugging level="0"/>
 <host><status state="up" reason="syn-ack" reason_ttl="0"/>
@@ -10,57 +10,57 @@
 <hostnames>
 <hostname name="Pumphouse" type="PTR"/>
 </hostnames>
-<times srtt="12416" rttvar="12416" to="100000"/>
+<times srtt="25982" rttvar="25982" to="129910"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.109" addrtype="ipv4"/>
 <hostnames>
 <hostname name="DavidsApleWatch.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="12089" rttvar="12089" to="100000"/>
+<times srtt="67094" rttvar="67094" to="335470"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.113" addrtype="ipv4"/>
 <hostnames>
 <hostname name="KatieTarsiPhone.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="11086" rttvar="11086" to="100000"/>
+<times srtt="63837" rttvar="63837" to="319185"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.118" addrtype="ipv4"/>
 <hostnames>
 <hostname name="kindle-6b8dcf313.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="41759" rttvar="41759" to="208795"/>
+<times srtt="20378" rttvar="20378" to="101890"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.119" addrtype="ipv4"/>
 <hostnames>
 <hostname name="black-pearl.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="16317" rttvar="16317" to="100000"/>
+<times srtt="11376" rttvar="11376" to="100000"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.126" addrtype="ipv4"/>
 <hostnames>
 <hostname name="Davids-MacBook.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="620" rttvar="5000" to="100000"/>
+<times srtt="2609" rttvar="5000" to="100000"/>
 </host>
 <host><status state="up" reason="syn-ack" reason_ttl="0"/>
 <address addr="192.168.1.138" addrtype="ipv4"/>
 <hostnames>
 <hostname name="BRW904CE57322C0.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="6666" rttvar="6666" to="100000"/>
+<times srtt="7189" rttvar="7189" to="100000"/>
 </host>
 <host><status state="up" reason="conn-refused" reason_ttl="0"/>
 <address addr="192.168.1.149" addrtype="ipv4"/>
 <hostnames>
 <hostname name="Davids-iPhone-2.hsd1.ca.comcast.net" type="PTR"/>
 </hostnames>
-<times srtt="83466" rttvar="83466" to="417330"/>
+<times srtt="80071" rttvar="87840" to="431431"/>
 </host>
-<runstats><finished time="1467523073" timestr="Sat Jul  2 22:17:53 2016" elapsed="5.51" summary="Nmap done at Sat Jul  2 22:17:53 2016; 256 IP addresses (8 hosts up) scanned in 5.51 seconds" exit="success"/><hosts up="8" down="248" total="256"/>
+<runstats><finished time="1467522982" timestr="Sat Jul  2 22:16:22 2016" elapsed="6.36" summary="Nmap done at Sat Jul  2 22:16:22 2016; 256 IP addresses (8 hosts up) scanned in 6.36 seconds" exit="success"/><hosts up="8" down="248" total="256"/>
 </runstats>
 </nmaprun>
