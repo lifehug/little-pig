@@ -45,6 +45,7 @@ public class DiscoveryDataHandler{
     String mac = host.getMAC();
     String vendor = host.getVendor();
     int ip_addr = host.getIPAddress();
+    String hostname = host.getHostname();
     String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS ( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
     " UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", vendor=" + vendor + " WHERE mac = " + mac + ";";
     return query; 

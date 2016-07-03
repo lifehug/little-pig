@@ -17,7 +17,7 @@ public class DiscoveryConnection{
     if(connection == null){
 
       // get this data from a properties file
-      String url = "jdbc:mysql://database:3306/snort";
+      String url = "jdbc:mysql://127.0.0.1:3306/snort";
       String user = "snort";
       String password = "Wdnb6EV2x6nNaVuDzeaZ2N9MFbtz3J8YBciz34wkvpkyGT8Apq";
       // Load the Connector/J driver
