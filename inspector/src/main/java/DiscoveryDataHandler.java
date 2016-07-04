@@ -31,9 +31,15 @@ public class DiscoveryDataHandler{
     Statement st = connection.createStatement();
     while (it.hasNext()){
       Host host = it.next();
-      String entry = getQuery(host, date);
-      System.out.println(entry);
-      st.addBatch(entry);
+      String hostname = host.getHostname();
+      if(!hostname.equals("")){
+        String insert = getInsert(host, date);
+        String update = getUpdate(host, date);
+        System.out.println(insert);
+        System.out.println(update);
+        st.addBatch(insert);
+        st.addBatch(update);
+      }
     }
     int[] outcome = st.executeBatch();
 
@@ -42,16 +48,26 @@ public class DiscoveryDataHandler{
     // verify the result set
   }
 
-  public String getQuery(Host host, LocalDateTime date){
+  public String getInsert(Host host, LocalDateTime date){
     String mac = host.getMAC();
     String vendor = host.getVendor();
-    int ip_addr = host.getIPAddress();
+    long ip_addr = host.getIPAddress();
     String hostname = host.getHostname();
 
-    String query = "INSERT INTO device(hostname, discovered) SELECT '" + hostname + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');";
-    query += " UPDATE device SET ip_addr=" + ip_addr + ", last_seen='" + date + "',";
-    if(!vendor.equals("")) query += " vendor='" + vendor + "',";
-    query += " mac='" + mac + "' WHERE hostname ='" + hostname + "';";
+    String query = "INSERT INTO device(hostname, discovered, ip_addr, last_seen) SELECT '" + hostname + "', '" + date + "', '" + ip_addr + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');";
+
+
+    return query; 
+  }
+
+  public String getUpdate(Host host, LocalDateTime date){
+
+    String mac = host.getMAC();
+    String vendor = host.getVendor();
+    long ip_addr = host.getIPAddress();
+    String hostname = host.getHostname();
+
+    String query = "UPDATE device SET ip_addr=" + ip_addr + ", last_seen='" + date + "', vendor='" + vendor + "', mac='" + mac + "' WHERE hostname ='" + hostname + "';";
 
     return query; 
   }
