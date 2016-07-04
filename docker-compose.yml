@@ -27,6 +27,8 @@ services:
   ping: 
     # build: ./ping
     image: etherfuse/ping:0.1
+    volumes_from: 
+      - database 
     networks: 
       - database
 
