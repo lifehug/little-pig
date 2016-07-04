@@ -46,8 +46,12 @@ public class DiscoveryDataHandler{
     String vendor = host.getVendor();
     int ip_addr = host.getIPAddress();
     String hostname = host.getHostname();
-    String query =  "INSERT INTO device(hostname, discovered) SELECT '" + hostname + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');" +
-    " UPDATE device SET ip_addr=" + ip_addr + ", last_seen='" + date + "', vendor='" + vendor + "', mac='" + mac + "' WHERE hostname ='" + hostname + "';";
+
+    String query = "INSERT INTO device(hostname, discovered) SELECT '" + hostname + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');";
+    query += " UPDATE device SET ip_addr=" + ip_addr + ", last_seen='" + date + "',";
+    if(!vendor.equals("")) query += " vendor='" + vendor + "',";
+    query += " mac='" + mac + "' WHERE hostname ='" + hostname + "';";
+
     return query; 
   }
 
