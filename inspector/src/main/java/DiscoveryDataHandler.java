@@ -32,6 +32,7 @@ public class DiscoveryDataHandler{
     while (it.hasNext()){
       Host host = it.next();
       String entry = getQuery(host, date);
+      System.out.println(entry);
       st.addBatch(entry);
     }
     int[] outcome = st.executeBatch();

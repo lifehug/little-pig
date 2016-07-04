@@ -9,7 +9,7 @@ CREATE TABLE profile ( id INT UNSIGNED NOT NULL,
                       network    TINYINT,
                       PRIMARY KEY (id));
 
-CREATE TABLE device (mac VARCHAR(50) UNSIGNED,
+CREATE TABLE device (mac VARCHAR(50),
                      ip_addr INT UNSIGNED NOT NULL,
                      hostname VARCHAR(100) NOT NULL,
                      src_prt INT UNSIGNED,
