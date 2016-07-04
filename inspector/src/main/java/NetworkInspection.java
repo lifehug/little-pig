@@ -21,7 +21,7 @@ public class NetworkInspection{
       // save those details to your database
       Connection connection = DiscoveryConnection.getConnection();
       DiscoveryDataHandler ddh = new DiscoveryDataHandler(discovery, connection);
-
+      ddh.save();
 
     } catch (Exception e){
       e.printStackTrace();

@@ -68,7 +68,11 @@ public class NmapSNType implements Type{
           // get the correct address type data
           if(addressDetails.getNamedItem("addrtype").getNodeValue().equals("mac")){
             mac = addressDetails.getNamedItem("addr").getNodeValue();
-            vendor = addressDetails.getNamedItem("vendor").getNodeValue();
+
+            if(addressDetails.getNamedItem("vendor") != null){
+              vendor = addressDetails.getNamedItem("vendor").getNodeValue();
+            }
+
           } else {
             address = addressDetails.getNamedItem("addr").getNodeValue();
           }
