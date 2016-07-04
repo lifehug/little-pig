@@ -9,15 +9,16 @@ CREATE TABLE profile ( id INT UNSIGNED NOT NULL,
                       network    TINYINT,
                       PRIMARY KEY (id));
 
-CREATE TABLE device (mac BIGINT UNSIGNED NOT NULL,
+CREATE TABLE device (mac VARCHAR(50) UNSIGNED,
                      ip_addr INT UNSIGNED NOT NULL,
-                     src_prt INT UNSIGNED NOT NULL,
+                     hostname VARCHAR(100) NOT NULL,
+                     src_prt INT UNSIGNED,
                      discovered DATETIME NOT NULL, 
                      last_seen DATETIME NOT NULL,
-                      os VARCHAR(35), 
+                      vendor VARCHAR(50), 
                       os_details VARCHAR(255),
                       name VARCHAR(100),
-                      PRIMARY KEY (mac));
+                      PRIMARY KEY (hostname));
 
 
-CREATE VIEW associated AS SELECT id, mac FROM profile, device;
+CREATE VIEW associated AS SELECT id, hostname FROM profile, device;

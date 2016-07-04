@@ -34,24 +34,22 @@ public class DiscoveryDataHandler{
       String entry = getQuery(host, date);
       st.addBatch(entry);
     }
-
     int[] outcome = st.executeBatch();
+
     Arrays.parallelSort(outcome);
     if(outcome[0] == Statement.EXECUTE_FAILED) throw new Exception("You're database query didn't work");
     // verify the result set
   }
 
-  public String getQuery(Host host, LocalDateTime last_seen){
+  public String getQuery(Host host, LocalDateTime date){
     String mac = host.getMAC();
     String vendor = host.getVendor();
     int ip_addr = host.getIPAddress();
     String hostname = host.getHostname();
-    String query =  "INSERT INTO device (mac, discovered) WHERE NOT EXISTS ( SELECT mac FROM DEVICE WHERE mac = " + mac + ");" +
-    " UPDATE device SET ip_addr =" + ip_addr + ", last_seen=" + last_seen + ", vendor=" + vendor + " WHERE mac = " + mac + ";";
+    String query =  "INSERT INTO device(hostname, discovered) SELECT '" + hostname + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');" +
+    " UPDATE device SET ip_addr=" + ip_addr + ", last_seen='" + date + "', vendor='" + vendor + "', mac='" + mac + "' WHERE hostname ='" + hostname + "';";
     return query; 
   }
-
-
 
 }
 

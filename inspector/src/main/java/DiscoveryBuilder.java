@@ -8,12 +8,10 @@ import java.util.List;
 import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
-// could get rid of file by piping the output to string
 public class DiscoveryBuilder{
 
   Type discoveryType;
   String network;
-  String filename;
 
   public DiscoveryBuilder setDiscoveryType(Type discoveryType){
     this.discoveryType = discoveryType;
@@ -22,11 +20,6 @@ public class DiscoveryBuilder{
 
   public DiscoveryBuilder setNetwork(String network){
     this.network = network;
-    return this;
-  }
-
-  public DiscoveryBuilder setFilename(String filename){
-    this.filename = filename;
     return this;
   }
 

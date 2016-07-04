@@ -16,12 +16,11 @@ public class DiscoveryConnection{
 
     if(connection == null){
 
-      // get this data from a properties file
+      // eventually get this data from a properties file loaded from environment variables via docker
       String url = "jdbc:mysql://127.0.0.1:3306/snort";
       String user = "snort";
       String password = "Wdnb6EV2x6nNaVuDzeaZ2N9MFbtz3J8YBciz34wkvpkyGT8Apq";
-      // Load the Connector/J driver
-      Class.forName("com.mysql.jdbc.Driver").newInstance();
+      //Class.forName("com.mysql.jdbc.Driver").newInstance();
       connection = DriverManager.getConnection(url, user, password);
     }
 

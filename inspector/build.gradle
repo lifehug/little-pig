@@ -36,6 +36,7 @@ repositories {
 dependencies {
     compile 'com.google.guava:guava:19.0'
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'mysql:mysql-connector-java:6.0.3'
     testCompile 'junit:junit:4.12'
 }
 

@@ -10,18 +10,19 @@ public class NetworkInspection{
     try {
 
       if(args.length < 1) throw new Exception("Network argument must be provided : " + args[0]);
-      // may be able to pull local network automatically from uname -a or something
-      // call nmap for the discovery and pipe it to a filename
-      String filename = "output.txt";
+
       String network = args[0];
       System.out.println(network);
-      Discovery discovery = new DiscoveryBuilder().setNetwork(network).setFilename(filename).setDiscoveryType(new NmapSNType()).create();
+
+      // discover the network
+      Discovery discovery = new DiscoveryBuilder().setNetwork(network).setDiscoveryType(new NmapSNType()).create();
       System.out.println(discovery);
 
-      //Connection connection = DiscoveryConnection.getConnection();
-      //DiscoveryDataHandler ddh = new DiscoveryDataHandler(discovery, connection);
+      // save those details to your database
+      Connection connection = DiscoveryConnection.getConnection();
+      DiscoveryDataHandler ddh = new DiscoveryDataHandler(discovery, connection);
 
-      // save the details to the database
+
     } catch (Exception e){
       e.printStackTrace();
     }
