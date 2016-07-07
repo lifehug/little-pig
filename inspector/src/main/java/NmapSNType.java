@@ -66,7 +66,7 @@ public class NmapSNType implements Type{
           
           NamedNodeMap addressDetails = hostDetail.getAttributes();
           // get the correct address type data
-          if(addressDetails.getNamedItem("addrtype").getNodeValue().equals("mac")){
+          if(addressDetails.getNamedItem("addrtype") != null && addressDetails.getNamedItem("addrtype").getNodeValue().equals("mac")){
             mac = addressDetails.getNamedItem("addr").getNodeValue();
 
             if(addressDetails.getNamedItem("vendor") != null){
@@ -74,7 +74,11 @@ public class NmapSNType implements Type{
             }
 
           } else {
-            address = addressDetails.getNamedItem("addr").getNodeValue();
+            
+            if(addressDetails.getNamedItem("addr") != null){
+              address = addressDetails.getNamedItem("addr").getNodeValue();
+            }
+
           }
 
         } else if(hostDetail.getNodeName().equals("hostnames")){
@@ -94,7 +98,10 @@ public class NmapSNType implements Type{
      
       }
 
-      hosts.add(new Host(address, mac, vendor, hostname));
+      if(!hostname.equals("")){
+        hosts.add(new Host(address, mac, vendor, hostname));
+      }
+      
     }
 
     return new Discovery(time, args, hosts);

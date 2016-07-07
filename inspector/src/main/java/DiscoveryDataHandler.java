@@ -31,21 +31,18 @@ public class DiscoveryDataHandler{
     Statement st = connection.createStatement();
     while (it.hasNext()){
       Host host = it.next();
-      String hostname = host.getHostname();
-      if(!hostname.equals("")){
-        String insert = getInsert(host, date);
-        String update = getUpdate(host, date);
-        System.out.println(insert);
-        System.out.println(update);
-        st.addBatch(insert);
-        st.addBatch(update);
-      }
+      String insert = getInsert(host, date);
+      String update = getUpdate(host, date);
+      System.out.println(insert);
+      System.out.println(update);
+      st.addBatch(insert);
+      st.addBatch(update);
     }
-    int[] outcome = st.executeBatch();
 
+    int[] outcome = st.executeBatch();
     Arrays.parallelSort(outcome);
-    if(outcome[0] == Statement.EXECUTE_FAILED) throw new Exception("You're database query didn't work");
-    // verify the result set
+    if(outcome[0] == Statement.EXECUTE_FAILED) throw new Exception("Your database query didn't work");
+
   }
 
   public String getInsert(Host host, LocalDateTime date){
@@ -55,7 +52,6 @@ public class DiscoveryDataHandler{
     String hostname = host.getHostname();
 
     String query = "INSERT INTO device(hostname, discovered, ip_addr, last_seen) SELECT '" + hostname + "', '" + date + "', '" + ip_addr + "', '" + date + "' FROM dual WHERE NOT EXISTS (SELECT * FROM device WHERE hostname = '" + hostname + "');";
-
 
     return query; 
   }
