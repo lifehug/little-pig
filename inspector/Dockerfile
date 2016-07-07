@@ -1,5 +1,5 @@
-FROM java:8
-#FROM hypriot/rpi-java
+#FROM java:8
+FROM hypriot/rpi-java
 
 ENV home /root/inspector
 ENV gradle gradle-2.14
@@ -21,5 +21,4 @@ RUN unzip ${gradle}-bin.zip -d ${home}
 COPY . ${home}
 RUN gradle build
 
-# the network will be passed in at run time
-# RUN gradle sweep '-Pnet=192.168.1.0/24'
+CMD ["./sweep_cmd.sh"]
