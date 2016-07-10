@@ -15,6 +15,7 @@ services:
      - "3306:3306"
     networks:
      - database
+     - server
  
   snort: 
     # build: ./snort
@@ -44,8 +45,19 @@ services:
     volumes_from: 
       - database 
 
+  build_api:
+    build: ./build
+
+  api:
+    build: ./api
+  volumes_from:
+    - database
+  networks:
+    - server
+
 volumes:
   data:
 
 networks: 
   database:
+  server:
