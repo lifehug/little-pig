@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.LongParam;
 import com.etherfuse.server.db.DeviceDAO;
+import io.dropwizard.hibernate.UnitOfWork;
+import com.etherfuse.server.core.Device;
 
 @Path("/devices")
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +29,7 @@ public class DeviceResource {
 
     @GET
     @UnitOfWork
-    public List<DeviceDAO> getDevices() {
+    public List<Device> getDevices() {
         return deviceDAO.findAll();
     }
 

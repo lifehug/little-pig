@@ -1,6 +1,6 @@
 package com.etherfuse.server.core;
 
-import java.sql.Date
+import java.sql.Date;
 
 public class Device{
   
@@ -22,7 +22,7 @@ public class Device{
     this.ipAddress = ipAddress;
     this.sourcePort = sourcePort;
     this.discovered = discovered;
-    this.lastSeen lastSeen;
+    this.lastSeen = lastSeen;
     this.vendor = vendor;
     this.osDetails = osDetails;
     this.name = name;
@@ -34,7 +34,7 @@ public class Device{
     return mac;
   }
 
-  public setMac(String mac){
+  public void setMac(String mac){
     this.mac = mac;
   }
 
@@ -42,7 +42,7 @@ public class Device{
     return ipAddress;
   }
 
-  public setIpAddress(String ipAddress){
+  public void setIpAddress(Long ipAddress){
     this.ipAddress = ipAddress;
   }
 
@@ -50,7 +50,7 @@ public class Device{
     return sourcePort;
   }
 
-  public setSourcePort(int sourcePort){
+  public void setSourcePort(int sourcePort){
     this.sourcePort = sourcePort;
   }
 
@@ -58,7 +58,7 @@ public class Device{
     return discovered;
   }
 
-  public setDiscovered( Date discovered){
+  public void setDiscovered( Date discovered){
     this.discovered = discovered;
   }  
 
@@ -66,7 +66,7 @@ public class Device{
     return lastSeen;
   }
 
-  public setLastSeen(Date lastSeen){
+  public void setLastSeen(Date lastSeen){
     this.lastSeen = lastSeen;
   }
 
@@ -74,7 +74,7 @@ public class Device{
     return vendor;
   }
 
-  public setVendor(String vendor){
+  public void setVendor(String vendor){
     this.vendor = vendor;
   }
 
@@ -82,7 +82,7 @@ public class Device{
     return osDetails;
   }
 
-  public setOsDetails(String osDetails){
+  public void setOsDetails(String osDetails){
     this.osDetails = osDetails;
   }
 
@@ -90,7 +90,7 @@ public class Device{
     return name;
   }
 
-  public setName(String name){
+  public void setName(String name){
     this.name = name;
   }
 
@@ -98,7 +98,7 @@ public class Device{
     return hostname;
   }
 
-  public setHostname(String hostname){
+  public void setHostname(String hostname){
     this.hostname = hostname;
   }
 

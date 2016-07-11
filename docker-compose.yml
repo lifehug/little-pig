@@ -45,15 +45,15 @@ services:
     volumes_from: 
       - database 
 
-  build_api:
-    build: ./build
-
   api:
-    build: ./api
-  volumes_from:
+   build: ./api
+   volumes_from:
     - database
-  networks:
-    - server
+   networks:
+     - server
+   ports:
+    - "8080:8080"
+
 
 volumes:
   data:
