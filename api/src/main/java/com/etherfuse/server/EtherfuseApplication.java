@@ -22,7 +22,7 @@ public class EtherfuseApplication extends Application<EtherfuseConfiguration> {
 
     @Override
     public void initialize(Bootstrap<EtherfuseConfiguration> bootstrap) {
-        //bootstrap.setName("etherfuse-server");
+ 
     }
 
   @Override

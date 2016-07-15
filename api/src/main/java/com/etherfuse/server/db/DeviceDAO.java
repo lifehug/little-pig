@@ -14,6 +14,11 @@ public interface DeviceDAO {
   List<Device> findAll();
 
   @SqlQuery("select * from device where mac = :mac")
-  String findNameByMAC(@Bind("mac") String mac);
+  Device findNameByMAC(@Bind("mac") String mac);
 
+  @SqlQuery("select * from device where hostname = :hostname")
+  Device findNameByHostname(@Bind("hostname") String hostname);
+
+  @SqlQuery("select * from device where ip_addr = :ip_addr")
+  Device findNameByIPAddress(@Bind("ip_addr") String ip_addr);
 }
