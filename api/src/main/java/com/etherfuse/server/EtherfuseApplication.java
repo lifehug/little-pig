@@ -5,6 +5,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import com.etherfuse.server.resources.DeviceResource;
 import com.etherfuse.server.db.DeviceDAO;
+import com.etherfuse.server.resources.ProfileResource;
+import com.etherfuse.server.db.ProfileDAO;
 import io.dropwizard.jdbi.DBIFactory;
 import org.skife.jdbi.v2.DBI;
 
@@ -32,6 +34,9 @@ public class EtherfuseApplication extends Application<EtherfuseConfiguration> {
     
     final DeviceDAO dao = jdbi.onDemand(DeviceDAO.class);
     environment.jersey().register(new DeviceResource(dao));
+
+    final ProfileDAO pdao = jdbi.onDemand(ProfileDAO.class);
+    environment.jersey().register(new ProfileResource(pdao));
   }
 
 }
