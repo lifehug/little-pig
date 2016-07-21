@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response.Status;
 
 @Path("/profile")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ProfileResource {
 
     private final ProfileDAO profileDAO;
@@ -53,7 +54,6 @@ public class ProfileResource {
     @POST
     @Path("/create")
     @UnitOfWork
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response createProfile(Profile p){
         
         int ids = p.getId();
@@ -67,13 +67,12 @@ public class ProfileResource {
             throw new WebApplicationException(Status.BAD_REQUEST);
         }
 
-        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, res)).build();
+        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, res)).entity(new Profile(ids, first, last, email, net)).build();
     }  
 
     @PUT
     @Path("/{id}")
     @UnitOfWork
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateProfile(@PathParam("id") IntParam id, Profile p){
         
         int ids = id.get();
@@ -83,11 +82,11 @@ public class ProfileResource {
         boolean net = p.getNetwork();  
         int update = profileDAO.updateProfile(ids, first, last, email, net);
 
-        if( update == 0){
+        if( update == 0 ){
             throw new WebApplicationException(Status.NOT_FOUND);
         }
 
-        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, update)).build();
+        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, update)).entity(new Profile(ids, first, last, email, net)).build();
 
     } 
 

@@ -1,3 +1,4 @@
+
 version: '2'
 
 services: 
@@ -25,13 +26,13 @@ services:
   #   networks: 
   #     - database
 
-  # ping: 
-  #   # build: ./ping
-  #   image: etherfuse/ping:0.1
-  #   volumes_from: 
-  #     - database 
-  #   networks: 
-  #     - database
+  ping: 
+    build: ./ping
+    #image: etherfuse/ping:0.1
+    volumes_from: 
+      - database 
+    networks: 
+      - database
 
   # client: 
   #   # build: ./client
