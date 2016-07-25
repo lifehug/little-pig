@@ -18,9 +18,11 @@ import org.w3c.dom.Node;
 
 public class NmapSNType implements Type{
 
+  private final String FILE = "output.xml";
+  
   public void execute(String network) throws Exception{
     
-      ProcessBuilder builder = new ProcessBuilder("nmap", "-sn", network, "-oX", "output.xml");
+      ProcessBuilder builder = new ProcessBuilder("nmap", "-sn", network, "-oX", FILE);
       builder.redirectError(new File("error.log"));
       Process p = builder.start();
       int errCode = p.waitFor();
@@ -28,16 +30,26 @@ public class NmapSNType implements Type{
       if(errCode != 0){
         throw new Exception("Process Not Executed");
       }
+  }
+
+
+  public Discovery parse() throws Exception{
+
+    return parseFile(FILE);
 
   }
-  
-  public Discovery parse() throws Exception {
+
+
+  public Discovery parseFile(String file) throws Exception {
+
+
+    String filename = (file != null) ? file : "output.xml";
 
     Discovery discovery;
     List<Host> hosts = new ArrayList<Host>();
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
-    Document document = builder.parse(Paths.get("output.xml").toFile());
+    Document document = builder.parse(Paths.get(filename).toFile());
     
     // discovery event data
     NodeList nmapRun = document.getElementsByTagName("nmaprun");

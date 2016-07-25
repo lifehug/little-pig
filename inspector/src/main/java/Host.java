@@ -1,6 +1,7 @@
 package com.etherfuse.inspector;
 
 import java.lang.Integer;
+import java.util.Objects;
 
 public class Host{
   
@@ -51,6 +52,21 @@ public class Host{
     }
 
     return result;
+  }
+
+  public boolean equals(Object o) {
+
+     if (o == this) return true;
+     if (!(o instanceof Host)) {
+         return false;
+     }
+     
+     Host host = (Host) o;
+     return addr.equals(host.addr) && Objects.equals(mac, host.mac);
+  }
+
+  public int hashCode(){
+    return Objects.hash(addr, mac, vendor, hostname);
   }
 
   public String toString(){
