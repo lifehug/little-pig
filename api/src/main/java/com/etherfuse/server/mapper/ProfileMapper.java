@@ -9,6 +9,6 @@ import java.sql.SQLException;
 
 public class ProfileMapper implements ResultSetMapper<Profile> {
   public Profile map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-    return new Profile(r.getInt("id"), r.getString("firstname"), r.getString("lastname"), r.getString("email"), r.getBoolean("network"));
+    return new Profile(r.getInt("id"), r.getString("firstname"), r.getString("lastname"), r.getString("email"));
   }
 }

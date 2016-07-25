@@ -7,5 +7,6 @@
   "vendor":"none",
   "osDetails": "temp",
   "name":"Linux",
+  "owner" : 0,
   "hostname":"Pumphouse"
 }

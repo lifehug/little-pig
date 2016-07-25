@@ -49,8 +49,8 @@ public class ProfileResource {
     public Profile getDeviceByID(@PathParam("id") IntParam id){
         return profileDAO.findProfileByID(id.get()); 
 
-    }    
-
+    }
+     
     @POST
     @UnitOfWork
     public Response createProfile(Profile p){
@@ -59,14 +59,13 @@ public class ProfileResource {
         String first = p.getFirstname();
         String last = p.getLastname();
         String email = p.getEmail();
-        boolean net = p.getNetwork();
-        int res = profileDAO.createProfile(ids, first, last, email, net);
+        int res = profileDAO.createProfile(ids, first, last, email);
 
         if( res == 0){
             throw new WebApplicationException(Status.BAD_REQUEST);
         }
 
-        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, res)).entity(new Profile(ids, first, last, email, net)).build();
+        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, res)).entity(new Profile(ids, first, last, email)).build();
     }  
 
     @PUT
@@ -77,15 +76,14 @@ public class ProfileResource {
         int ids = id.get();
         String first = p.getFirstname();
         String last = p.getLastname();
-        String email = p.getEmail();
-        boolean net = p.getNetwork();  
-        int update = profileDAO.updateProfile(ids, first, last, email, net);
+        String email = p.getEmail(); 
+        int update = profileDAO.updateProfile(ids, first, last, email);
 
         if( update == 0 ){
             throw new WebApplicationException(Status.NOT_FOUND);
         }
 
-        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, net, update)).entity(new Profile(ids, first, last, email, net)).build();
+        return Response.created(UriBuilder.fromResource(ProfileResource.class).build(ids, first, last, email, update)).entity(new Profile(ids, first, last, email)).build();
 
     } 
 

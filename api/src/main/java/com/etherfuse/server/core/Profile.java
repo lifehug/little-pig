@@ -8,17 +8,15 @@ public class Profile{
   private String firstname;
   private String lastname;
   private String email;
-  private boolean network;
   
   public Profile() {}
 
-  public Profile(int id, String firstname, String lastname, String email, boolean network){
+  public Profile(int id, String firstname, String lastname, String email){
     
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
-    this.network = network;
 
   }
 
@@ -52,14 +50,6 @@ public class Profile{
 
   public void setEmail(String email){
     this.email = email;
-  }
-
-  public boolean getNetwork(){
-    return network;
-  }
-
-  public void setNetwork(boolean network){
-    this.network = network;
   }
 
   public boolean equals(Object o) {

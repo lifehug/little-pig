@@ -9,6 +9,9 @@ CREATE TABLE profile ( id INT UNSIGNED NOT NULL,
                       network    TINYINT,
                       PRIMARY KEY (id));
 
+# create the default network profile
+INSERT INTO profile (id, firstname, lastname, email) VALUES (0, 'unassigned', 'network', 'notset@etherfuse.com');                      
+
 CREATE TABLE device (mac VARCHAR(50),
                      ip_addr INT UNSIGNED NOT NULL,
                      hostname VARCHAR(100) NOT NULL,
@@ -18,7 +21,6 @@ CREATE TABLE device (mac VARCHAR(50),
                       vendor VARCHAR(50), 
                       os_details VARCHAR(255),
                       name VARCHAR(100),
+                      owner INT DEFAULT 0,
+                      FOREIGN KEY (owner) REFERENCES profile(id),
                       PRIMARY KEY (hostname));
-
-
-CREATE VIEW associated AS SELECT id, hostname FROM profile, device;

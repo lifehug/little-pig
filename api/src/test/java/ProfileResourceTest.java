@@ -17,7 +17,7 @@ public class ProfileResourceTest {
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder().addResource(new ProfileResource(dao)).build();
 
-    final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com", false);
+    final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com");
 
     @Before
     public void setup() {

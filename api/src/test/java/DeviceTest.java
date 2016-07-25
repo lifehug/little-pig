@@ -16,7 +16,7 @@ public class DeviceTest {
     public void serializesToJSON() throws Exception {
 
         MAPPER.setTimeZone(TimeZone.getDefault());
-        final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", "Pumphouse");
+        final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", 0, "Pumphouse");
 
         final String expected = MAPPER.writeValueAsString(MAPPER.readValue(fixture("fixtures/device.json"), Device.class));
 
@@ -25,7 +25,7 @@ public class DeviceTest {
 
     @Test
     public void deserializesFromJSON() throws Exception {
-        final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", "Pumphouse");
+        final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", 0, "Pumphouse");
         assertThat(MAPPER.readValue(fixture("fixtures/device.json"), Device.class)).isEqualTo(device);
     }       
 }

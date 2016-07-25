@@ -17,9 +17,10 @@ public interface ProfileDAO {
   @SqlQuery("select * from profile where id = :id")
   Profile findProfileByID(@Bind("id") int id);
 
-  @SqlUpdate("insert into profile (id, firstname, lastname, email, network) values (:id, :firstname, :lastname, :email, :network)")
-  int createProfile(@Bind("id") int id, @Bind("firstname") String firstname, @Bind("lastname") String lastname, @Bind("email") String email, @Bind("network") boolean network);
+  @SqlUpdate("insert into profile (id, firstname, lastname, email, network) values (:id, :firstname, :lastname, :email)")
+  int createProfile(@Bind("id") int id, @Bind("firstname") String firstname, @Bind("lastname") String lastname, @Bind("email") String email);
 
-  @SqlUpdate("update profile set firstname = :firstname, lastname = :lastname, email = :email, network = :network where id = :id")
-  int updateProfile(@Bind("id") int id, @Bind("firstname") String firstname, @Bind("lastname") String lastname, @Bind("email") String email, @Bind("network") boolean network);
+  @SqlUpdate("update profile set firstname = :firstname, lastname = :lastname, email = :email where id = :id")
+  int updateProfile(@Bind("id") int id, @Bind("firstname") String firstname, @Bind("lastname") String lastname, @Bind("email") String email);
+
 }

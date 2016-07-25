@@ -9,6 +9,6 @@ import java.sql.SQLException;
 
 public class DeviceMapper implements ResultSetMapper<Device> {
   public Device map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-    return new Device(r.getString("mac"), r.getLong("ip_addr"), r.getInt("src_prt"), r.getDate("discovered"), r.getDate("last_seen"), r.getString("vendor"), r.getString("os_details"), r.getString("name"), r.getString("hostname"));
+    return new Device(r.getString("mac"), r.getLong("ip_addr"), r.getInt("src_prt"), r.getDate("discovered"), r.getDate("last_seen"), r.getString("vendor"), r.getString("os_details"), r.getString("name"), r.getInt("owner"), r.getString("hostname"));
   }
 }

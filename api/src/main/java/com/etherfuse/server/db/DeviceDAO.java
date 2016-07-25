@@ -2,6 +2,7 @@ package com.etherfuse.server.db;
 
 import com.etherfuse.server.mapper.DeviceMapper;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 import com.etherfuse.server.core.Device;
@@ -21,4 +22,11 @@ public interface DeviceDAO {
 
   @SqlQuery("select * from device where ip_addr = :ip_addr")
   Device findNameByIPAddress(@Bind("ip_addr") String ip_addr);
+
+  @SqlQuery("select * from device where owner = :owner_id")
+  List<Device> findDevicesByProfileId(@Bind("id") String owner_id);
+
+  @SqlUpdate("update profile set owner = :id where hostname = :hostname")
+  int assign(@Bind("id") int id, @Bind("hostname") String hostname);
+
 }

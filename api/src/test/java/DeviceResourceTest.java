@@ -18,7 +18,7 @@ public class DeviceResourceTest {
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder().addResource(new DeviceResource(dao)).build();
 
-    final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", "Pumphouse");
+    final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", 0, "Pumphouse");
 
     @Before
     public void setup() {
@@ -33,21 +33,21 @@ public class DeviceResourceTest {
     }
 
     @Test
-    public void testGetPerson() {
+    public void testGetDeviceByHost() {
         assertThat(resources.client().target("/device/hostname/Pumphouse").request().get(Device.class)).isEqualTo(device);
         verify(dao).findNameByHostname("Pumphouse");
     }
 
     @Test
-    public void testGetPerson() {
-        assertThat(resources.client().target("/device/hostname/Pumphouse").request().get(Device.class)).isEqualTo(device);
-        verify(dao).findNameByHostname("Pumphouse");
+    public void testGetDeviceByMac() {
+        assertThat(resources.client().target("/device/mac/80:80:80:80:80").request().get(Device.class)).isEqualTo(device);
+        verify(dao).findNameByMAC("80:80:80:80:80");
     }
 
     @Test
-    public void testGetPerson() {
-        assertThat(resources.client().target("/device/hostname/Pumphouse").request().get(Device.class)).isEqualTo(device);
-        verify(dao).findNameByHostname("Pumphouse");
+    public void testGetDeviceByIP() {
+        assertThat(resources.client().target("/device/ip/3232235777").request().get(Device.class)).isEqualTo(device);
+        verify(dao).findNameByIPAddress("3232235777");
     }
             
 }

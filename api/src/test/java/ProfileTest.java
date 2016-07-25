@@ -16,7 +16,7 @@ public class ProfileTest {
     public void serializesToJSON() throws Exception {
         
         MAPPER.setTimeZone(TimeZone.getDefault());
-        final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com", false);
+        final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com");
 
         final String expected = MAPPER.writeValueAsString(MAPPER.readValue(fixture("fixtures/profile.json"), Profile.class));
 
@@ -25,7 +25,7 @@ public class ProfileTest {
 
     @Test
     public void deserializesFromJSON() throws Exception {
-        final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com", false);
+        final Profile profile = new Profile(1, "David", "Taylor", "dave@etherfuse.com");
         assertThat(MAPPER.readValue(fixture("fixtures/profile.json"), Profile.class)).isEqualTo(profile);
     }  
 }

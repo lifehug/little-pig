@@ -13,11 +13,12 @@ public class Device{
   private String vendor;
   private String osDetails;
   private String name;
+  private int owner;
   private String hostname;
 
   public Device() {}
 
-  public Device(String mac, Long ipAddress, int sourcePort, Date discovered, Date lastSeen, String vendor, String osDetails, String name, String hostname){
+  public Device(String mac, Long ipAddress, int sourcePort, Date discovered, Date lastSeen, String vendor, String osDetails, String name, int owner, String hostname){
 
     this.mac = mac;
     this.ipAddress = ipAddress;
@@ -27,6 +28,7 @@ public class Device{
     this.vendor = vendor;
     this.osDetails = osDetails;
     this.name = name;
+    this.owner = owner;
     this.hostname = hostname;
 
   }
@@ -101,6 +103,14 @@ public class Device{
 
   public void setHostname(String hostname){
     this.hostname = hostname;
+  }
+
+  public int getOwner(){
+    return owner;
+  }
+
+  public void setOwner(int owner){
+    this.owner = owner;
   }
 
   public boolean equals(Object o) {
