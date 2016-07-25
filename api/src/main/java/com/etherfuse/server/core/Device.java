@@ -1,6 +1,7 @@
 package com.etherfuse.server.core;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Device{
   
@@ -100,6 +101,25 @@ public class Device{
 
   public void setHostname(String hostname){
     this.hostname = hostname;
+  }
+
+  public boolean equals(Object o) {
+
+     if (o == this) return true;
+     if (!(o instanceof Device)) {
+         return false;
+     }
+     
+     Device device = (Device) o;
+     return ipAddress.equals(device.ipAddress) && Objects.equals(mac, device.mac);
+  }
+
+  public int hashCode(){
+    return Objects.hash(mac, ipAddress);
+  }
+
+  public String toString(){
+    return mac + ":" + ipAddress;
   }
 
 }

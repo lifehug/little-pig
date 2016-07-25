@@ -1,0 +1,8 @@
+{
+  "id" : 1,
+  "firstname" : "David",
+  "lastname" : "Taylor",
+  "email" : "dave@etherfuse.com", 
+  "network" : false
+
+}

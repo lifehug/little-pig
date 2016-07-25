@@ -1,5 +1,7 @@
 package com.etherfuse.server.core;
 
+import java.util.Objects;
+
 public class Profile{
 
   private int id;
@@ -58,6 +60,26 @@ public class Profile{
 
   public void setNetwork(boolean network){
     this.network = network;
+  }
+
+  public boolean equals(Object o) {
+
+     if (o == this) return true;
+     if (!(o instanceof Profile)) {
+         return false;
+     }
+     Profile profile = (Profile) o;
+     return id == profile.id &&
+             Objects.equals(firstname, profile.firstname) &&
+             Objects.equals(lastname, profile.lastname);
+  }
+
+  public int hashCode(){
+    return Objects.hash(id, firstname, lastname);
+  }
+
+  public String toString(){
+    return id + ":" + firstname + ":" + lastname;
   }
   
 }

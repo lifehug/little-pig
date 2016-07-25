@@ -52,7 +52,6 @@ public class ProfileResource {
     }    
 
     @POST
-    @Path("/create")
     @UnitOfWork
     public Response createProfile(Profile p){
         
