@@ -24,9 +24,9 @@ public interface DeviceDAO {
   Device findNameByIPAddress(@Bind("ip_addr") String ip_addr);
 
   @SqlQuery("select * from device where owner = :owner_id")
-  List<Device> findDevicesByProfileId(@Bind("id") String owner_id);
+  List<Device> findDevicesByProfileId(@Bind("owner_id") int owner_id);
 
-  @SqlUpdate("update profile set owner = :id where hostname = :hostname")
+  @SqlUpdate("update device set owner = :id where hostname = :hostname")
   int assign(@Bind("id") int id, @Bind("hostname") String hostname);
 
 }

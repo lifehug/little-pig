@@ -52,9 +52,9 @@ public class DeviceResource {
     @GET
     @Path("/owner/{id}")
     @UnitOfWork
-    public List<Device> getDeviceByOwnerID(@PathParam("id") NonEmptyStringParam id){
-        Optional<String> val = id.get();
-        return deviceDAO.findDevicesByProfileId(val.get()); 
+    public List<Device> getDeviceByOwnerID(@PathParam("id") IntParam id){
+
+        return deviceDAO.findDevicesByProfileId(id.get()); 
 
     }           
 

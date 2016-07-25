@@ -1,5 +1,5 @@
-FROM java:8
-#FROM hypriot/rpi-java
+#FROM java:8
+FROM hypriot/rpi-java
 
 ENV home /root/api
 ENV gradle gradle-2.14
