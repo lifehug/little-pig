@@ -18,13 +18,13 @@ services:
      - database
      - server
  
-  # snort: 
-  #   # build: ./snort
-  #   image: etherfuse/snort:0.1
-  #   volumes:
-  #     - ./database/create_mysql:/root/create_mysql
-  #   networks: 
-  #     - database
+  snort: 
+    # build: ./snort
+    image: etherfuse/snort:0.1
+    volumes:
+      - ./database/create_mysql:/root/create_mysql
+    networks: 
+      - database
 
   ping: 
     build: ./ping
@@ -40,11 +40,11 @@ services:
   #   volumes: 
   #     - ./client/app:/usr/src/app
 
-  # inspector: 
-  #   build: ./inspector
-  #   network_mode: host
-  #   volumes_from: 
-  #     - database 
+  inspector: 
+    build: ./inspector
+    network_mode: host
+    volumes_from: 
+      - database 
 
   api:
    build: ./api
