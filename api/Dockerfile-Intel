@@ -1,12 +1,11 @@
-FROM hypriot/rpi-java
+FROM java:8
 
-ENV home /root/inspector
+ENV home /root/api
 ENV gradle gradle-2.14
 ENV GRADLE_HOME ${home}/${gradle}
 ENV PATH=$PATH:$GRADLE_HOME/bin
 
 RUN apt-get update \
-  && apt-get install -y nmap \
   && apt-get install -y mysql-client \
   && apt-get install -y unzip \
   && apt-get clean \
@@ -20,4 +19,4 @@ RUN unzip ${gradle}-bin.zip -d ${home}
 COPY . ${home}
 RUN gradle build
 
-CMD ["./sweep_cmd.sh"]
+CMD ["java", "-jar", "build/libs/api.jar", "server", "config.yml"]
