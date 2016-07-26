@@ -19,16 +19,18 @@ services:
      - server
  
   snort: 
-    build: ./snort
-    dockerfile: Dockerfile-Intel
+    build: 
+      context: ./snort
+      dockerfile: Dockerfile-Intel
     volumes:
       - ./database/create_mysql:/root/create_mysql
     networks: 
       - database
 
   ping: 
-    build: ./ping
-    dockerfile: Dockerfile-Intel
+    build: 
+      context: ./ping
+      dockerfile: Dockerfile-Intel
     volumes_from: 
       - database 
     networks: 
@@ -41,15 +43,17 @@ services:
   #     - ./client/app:/usr/src/app
 
   inspector: 
-    build: ./inspector
-    dockerfile: Dockerfile-Intel
+    build: 
+      context: ./inspector
+      dockerfile: Dockerfile-Intel
     network_mode: host
     volumes_from: 
       - database 
 
   api:
-   build: ./api
-   dockerfile: Dockerfile-Intel
+   build: 
+    context: ./api
+    dockerfile: Dockerfile-Intel
    volumes_from:
     - database
    networks:

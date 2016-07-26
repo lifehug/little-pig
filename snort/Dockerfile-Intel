@@ -35,7 +35,7 @@ RUN cd ${daq} && ./configure && make && make install
 
 # ================================= install Snort =================================  
 WORKDIR ${home}
-ADD https://snort.org/downloads/snort/${snort}.tar.gz ${snort}.tar.gz
+ADD https://www.snort.org/downloads/archive/snort/${snort}.tar.gz ${snort}.tar.gz
 RUN tar -xvzf ${snort}.tar.gz
 RUN cd ${snort} && ./configure --enable-sourcefire && make && make install
 RUN ldconfig
