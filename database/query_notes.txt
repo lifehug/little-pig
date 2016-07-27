@@ -1,0 +1,13 @@
+// all events
+select i.ip_src, i.ip_dst, p.firstname, d.hostname, e.timestamp from event as e left join iphdr as i on i.sid = e.sid and i.cid = e.cid left join  device as d on i.ip_dst = d.ip_addr left join profile as p on d.owner = p.id;
+
+// all events by device
+
+// all events by profile
+
+// specific event by event id
+
+// pagination
+
+// events between these two time periods
+

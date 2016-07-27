@@ -6,10 +6,10 @@ services:
   database:  
     image: mysql:5.5
     environment:
-      MYSQL_ROOT_PASSWORD: D3dfhB8p3k3F7t7rPhDNCzT7VJFiBaR7Z4shNQLd6YEZwmFxwv
+      MYSQL_ROOT_PASSWORD: ${ETHERFUSE_ROOT_DB}
       MYSQL_DATABASE: snort
       MYSQL_USER: snort
-      MYSQL_PASSWORD: Wdnb6EV2x6nNaVuDzeaZ2N9MFbtz3J8YBciz34wkvpkyGT8Apq
+      MYSQL_PASSWORD: ${ETHERFUSE_SNORT_DB}
     volumes:
       - data:/var/lib/mysql
     ports: 

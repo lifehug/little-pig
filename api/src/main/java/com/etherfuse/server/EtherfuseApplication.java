@@ -7,6 +7,8 @@ import com.etherfuse.server.resources.DeviceResource;
 import com.etherfuse.server.db.DeviceDAO;
 import com.etherfuse.server.resources.ProfileResource;
 import com.etherfuse.server.db.ProfileDAO;
+import com.etherfuse.server.resources.EventResource;
+import com.etherfuse.server.db.EventDAO;
 import io.dropwizard.jdbi.DBIFactory;
 import org.skife.jdbi.v2.DBI;
 
@@ -29,6 +31,7 @@ public class EtherfuseApplication extends Application<EtherfuseConfiguration> {
 
   @Override
   public void run(EtherfuseConfiguration config, Environment environment) {
+    
     final DBIFactory factory = new DBIFactory();
     final DBI jdbi = factory.build(environment, config.getDataSourceFactory(), "mysql");
     
@@ -37,6 +40,10 @@ public class EtherfuseApplication extends Application<EtherfuseConfiguration> {
 
     final ProfileDAO pdao = jdbi.onDemand(ProfileDAO.class);
     environment.jersey().register(new ProfileResource(pdao));
+
+    final EventDAO edao = jdbi.onDemand(EventDAO.class);
+    environment.jersey().register(new EventResource(edao));
+    
   }
 
 }
