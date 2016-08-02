@@ -27,9 +27,6 @@ public interface EventDAO {
   @SqlQuery("select p.id, i.sid, i.cid, i.ip_src, i.ip_dst, p.firstname, p.lastname, d.hostname, e.timestamp from event as e left join iphdr as i on i.sid = e.sid and i.cid = e.cid left join device as d on i.ip_dst = d.ip_addr or i.ip_src = d.ip_addr left join profile as p on d.owner = p.id and e.timestamp between :timeStr and :timeEnd order by e.timestamp limit :start,:end")
   List<Event> findAllWithPaging(@Bind("start") int start, @Bind("end") int end, @Bind("timeStr") Timestamp timeStr, @Bind("timeEnd") Timestamp timeEnd);
 
-  @SqlQuery("select p.id, i.sid, i.cid, i.ip_src, i.ip_dst, p.firstname, p.lastname, d.hostname, e.timestamp from event as e left join iphdr as i on i.sid = e.sid and i.cid = e.cid left join device as d on i.ip_dst = d.ip_addr or i.ip_src = d.ip_addr left join profile as p on d.owner = p.id where i.sid = :sid and i.cid = :cid order by e.timestamp limit :start,:end")
-  Event findEventByIDWithPaging(@Bind("sid") Long sid, @Bind("cid") Long cid, @Bind("start") int start, @Bind("end") int end);
-
   @SqlQuery("select p.id, i.sid, i.cid, i.ip_src, i.ip_dst, p.firstname, p.lastname, d.hostname, e.timestamp from event as e left join iphdr as i on i.sid = e.sid and i.cid = e.cid left join device as d on i.ip_dst = d.ip_addr or i.ip_src = d.ip_addr left join profile as p on d.owner = p.id where d.hostname = :hostname and e.timestamp between :timeStr and :timeEnd order by e.timestamp limit :start,:end")
   List<Event> findEventsByDeviceWithPaging(@Bind("hostname") String hostname, @Bind("start") int start, @Bind("end") int end, @Bind("timeStr") Timestamp timeStr, @Bind("timeEnd") Timestamp timeEnd);
 

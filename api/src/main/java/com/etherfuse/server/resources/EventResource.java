@@ -67,13 +67,9 @@ public class EventResource {
     @GET
     @Path("/{sid}/{cid}")
     @UnitOfWork
-    public Event getEventByID(@PathParam("sid") LongParam sid, @PathParam("cid") LongParam cid, @QueryParam("start") Optional<Integer> start, @QueryParam("end") Optional<Integer> end){
-
-        if(end.isPresent()){
-            return eventDAO.findEventByIDWithPaging(sid.get(), sid.get(), start.or(0), end.get());         
-        } else{
-            return eventDAO.findEventByID(sid.get(), sid.get());
-        }
+    public Event getEventByID(@PathParam("sid") LongParam sid, @PathParam("cid") LongParam cid){
+     
+        return eventDAO.findEventByID(sid.get(), cid.get());
 
     }
 
