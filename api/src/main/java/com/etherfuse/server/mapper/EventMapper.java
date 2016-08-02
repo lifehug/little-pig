@@ -9,6 +9,6 @@ import java.sql.SQLException;
 
 public class EventMapper implements ResultSetMapper<Event> {
   public Event map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-    return new Event(r.getInt("id"), r.getLong("ip_src"), r.getLong("ip_dst"), r.getString("firstname"), r.getString("lastname"), r.getString("hostname"), r.getDate("timestamp"), r.getLong("sid"), r.getLong("cid"));
+    return new Event(r.getInt("id"), r.getLong("ip_src"), r.getLong("ip_dst"), r.getString("firstname"), r.getString("lastname"), r.getString("hostname"), r.getTimestamp("timestamp"), r.getLong("sid"), r.getLong("cid"));
   }
 }

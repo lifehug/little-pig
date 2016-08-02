@@ -1,6 +1,6 @@
 package com.etherfuse.server.core;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Device{
@@ -8,8 +8,8 @@ public class Device{
   private String mac;
   private Long ipAddress;
   private int sourcePort;
-  private Date discovered;
-  private Date lastSeen;
+  private Timestamp discovered;
+  private Timestamp lastSeen;
   private String vendor;
   private String osDetails;
   private String name;
@@ -18,7 +18,7 @@ public class Device{
 
   public Device() {}
 
-  public Device(String mac, Long ipAddress, int sourcePort, Date discovered, Date lastSeen, String vendor, String osDetails, String name, int owner, String hostname){
+  public Device(String mac, Long ipAddress, int sourcePort, Timestamp discovered, Timestamp lastSeen, String vendor, String osDetails, String name, int owner, String hostname){
 
     this.mac = mac;
     this.ipAddress = ipAddress;
@@ -57,19 +57,19 @@ public class Device{
     this.sourcePort = sourcePort;
   }
 
-  public Date getDiscovered(){
+  public Timestamp getDiscovered(){
     return discovered;
   }
 
-  public void setDiscovered( Date discovered){
+  public void setDiscovered( Timestamp discovered){
     this.discovered = discovered;
   }  
 
-  public Date getLastSeen(){
+  public Timestamp getLastSeen(){
     return lastSeen;
   }
 
-  public void setLastSeen(Date lastSeen){
+  public void setLastSeen(Timestamp lastSeen){
     this.lastSeen = lastSeen;
   }
 

@@ -18,14 +18,14 @@ services:
      - database
      - server
  
-  snort: 
-    build: 
-      context: ./snort
-      dockerfile: Dockerfile-Intel
-    volumes:
-      - ./database/create_mysql:/root/create_mysql
-    networks: 
-      - database
+  # snort: 
+  #   build: 
+  #     context: ./snort
+  #     dockerfile: Dockerfile-Intel
+  #   volumes:
+  #     - ./database/create_mysql:/root/create_mysql
+  #   networks: 
+  #     - database
 
   ping: 
     build: 
@@ -42,13 +42,13 @@ services:
   #   volumes: 
   #     - ./client/app:/usr/src/app
 
-  inspector: 
-    build: 
-      context: ./inspector
-      dockerfile: Dockerfile-Intel
-    network_mode: host
-    volumes_from: 
-      - database 
+  # inspector: 
+  #   build: 
+  #     context: ./inspector
+  #     dockerfile: Dockerfile-Intel
+  #   network_mode: host
+  #   volumes_from: 
+  #     - database 
 
   api:
    build: 

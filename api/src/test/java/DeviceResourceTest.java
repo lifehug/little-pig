@@ -9,7 +9,7 @@ import io.dropwizard.testing.junit.ResourceTestRule;
 import com.etherfuse.server.db.DeviceDAO;
 import com.etherfuse.server.core.Device;
 import com.etherfuse.server.resources.DeviceResource;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class DeviceResourceTest {
 
@@ -18,7 +18,7 @@ public class DeviceResourceTest {
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder().addResource(new DeviceResource(dao)).build();
 
-    final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Date.valueOf("2016-07-04"), Date.valueOf("2016-07-07"), "none", "temp", "Linux", 0, "Pumphouse");
+    final Device device = new Device("80:80:80:80:80", 3232235777L, 0, Timestamp.valueOf("2016-07-04 00:00:00"), Timestamp.valueOf("2016-07-07 00:00:00"), "none", "temp", "Linux", 0, "Pumphouse");
 
     @Before
     public void setup() {

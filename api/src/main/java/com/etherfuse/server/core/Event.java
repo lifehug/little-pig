@@ -1,6 +1,6 @@
 package com.etherfuse.server.core;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Event{
@@ -11,13 +11,13 @@ public class Event{
   private String firstname; 
   private String lastname;
   private String device;
-  private Date timestamp;
+  private Timestamp timestamp;
   private Long sid;
   private Long cid;
 
   public Event() {}
 
-  public Event(int id, Long ipSrc, Long ipDst, String firstname, String lastname, String device, Date timestamp, Long sid, Long cid){
+  public Event(int id, Long ipSrc, Long ipDst, String firstname, String lastname, String device, Timestamp timestamp, Long sid, Long cid){
 
     this.id = id;
     this.ipSrc = ipSrc;
@@ -78,11 +78,11 @@ public class Event{
     this.device = device;
   }
 
-  public Date getTimestamp(){
+  public Timestamp getTimestamp(){
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp){
+  public void setTimestamp(Timestamp timestamp){
     this.timestamp = timestamp;
   }
 
