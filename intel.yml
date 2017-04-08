@@ -16,16 +16,15 @@ services:
      - "3306:3306"
     networks:
      - database
-     - server
  
-  # snort: 
-  #   build: 
-  #     context: ./snort
-  #     dockerfile: Dockerfile-Intel
-  #   volumes:
-  #     - ./database/create_mysql:/root/create_mysql
-  #   networks: 
-  #     - database
+  snort: 
+    build: 
+      context: ./snort
+      dockerfile: Dockerfile-Intel
+    volumes:
+      - ./database/create_mysql:/root/create_mysql
+    networks: 
+      - database
 
   ping: 
     build: 
@@ -36,35 +35,8 @@ services:
     networks: 
       - database
 
-  # client: 
-  #   # build: ./client
-  #   image: etherfuse/client:0.1
-  #   volumes: 
-  #     - ./client/app:/usr/src/app
-
-  # inspector: 
-  #   build: 
-  #     context: ./inspector
-  #     dockerfile: Dockerfile-Intel
-  #   network_mode: host
-  #   volumes_from: 
-  #     - database 
-
-  api:
-   build: 
-    context: ./api
-    dockerfile: Dockerfile-Intel
-   volumes_from:
-    - database
-   networks:
-     - server
-   ports:
-    - "8080:8080"
-
-
 volumes:
   data:
 
 networks: 
   database:
-  server:

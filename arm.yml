@@ -16,49 +16,16 @@ services:
      - "3306:3306"
     networks:
      - database
-     - server
  
   snort: 
-    # build: ./snort
-    image: etherfuse/snort:0.1
+    build: ./snort
     volumes:
       - ./database/create_mysql:/root/create_mysql
     networks: 
       - database
-
-  ping: 
-    build: ./ping
-    #image: etherfuse/ping:0.1
-    volumes_from: 
-      - database 
-    networks: 
-      - database
-
-  # client: 
-  #   # build: ./client
-  #   image: etherfuse/client:0.1
-  #   volumes: 
-  #     - ./client/app:/usr/src/app
-
-  inspector: 
-    build: ./inspector
-    network_mode: host
-    volumes_from: 
-      - database 
-
-  api:
-   build: ./api
-   volumes_from:
-    - database
-   networks:
-     - server
-   ports:
-    - "8080:8080"
-
 
 volumes:
   data:
 
 networks: 
   database:
-  server:

@@ -1,4 +1,0 @@
-FROM armv7/armhf-ubuntu 
-
-#Create app directory
-RUN apt-get -qq update && apt-get install -y mysql-client inetutils-ping
