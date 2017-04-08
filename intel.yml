@@ -26,15 +26,6 @@ services:
     networks: 
       - database
 
-  ping: 
-    build: 
-      context: ./ping
-      dockerfile: Dockerfile-Intel
-    volumes_from: 
-      - database 
-    networks: 
-      - database
-
 volumes:
   data:
 
